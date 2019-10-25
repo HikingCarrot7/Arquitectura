@@ -11,10 +11,14 @@
 rjmp start
 
 start:
-	ldi r18, 0b00110000
-	ldi r20, 10				; registro bandera para reiniciar el ciclo.
-	out	DDRD, r18			;Configura el prt D como entrada.
-	out DDRB, r16
+	ldi r22, 0b00000000
+	ldi r23, 0b11111111
+	ldi r18, 48
+	ldi r26, 48
+	ldi r27, 48
+	ldi r20, 255			; registro bandera para reiniciar el ciclo.
+	out	DDRD, r22			;Configura el prt D como entrada.
+	out DDRB, r23
 
 	nop 
 
@@ -29,21 +33,29 @@ CICLO:
 	rjmp CICLO
 
 BOTON_ON:
-
 	brbs 0, CICLO 			; Si el bit C del Rr SERG = 1, regresa a ciclo
 
-	mov r16, r18
+	mov r16, r27			;r27 centenas
+	call UART_TRANSMIT
+
+	mov r16, r26			;r26 decenas
+	call UART_TRANSMIT
+
+	mov r16, r18			;unidades
 	call UART_TRANSMIT
 
 	ldi r25, 10
 	mov r16, r25
 	call UART_TRANSMIT
-	
+
 	dec r20					; controla las repeticiones 
 	cpi r20, 0 				; compara que el r21 sea igual a 0
-	breq start 				; si el r21  = 0 brinca a start
-	
-	call CONTADOR
+	breq start 	
+							; si el r21  = 0 brinca a start
+
+	cpi r18, 58
+	call UNIDAD
+	;breq DECENA moria por esto no mover
 
 	sec 					;activar bandera de SERG en el bit C=1
 	rjmp CICLO
@@ -52,10 +64,24 @@ BOTON_OFF:
 	clc						;vuelve 0 el bit C de Rr SERG
 	rjmp CICLO
 
-CONTADOR:
+UNIDAD:
 	inc r18
+	cpi r18, 58
+	breq DECENA
+	ret
+	
+DECENA:
+	inc r26
+	cpi r26, 58
+	breq CENTENA
+	ldi r18, 48
 	ret
 
+CENTENA:
+	inc r27
+	ldi r26, 48
+	ldi r18, 48
+	ret
 
 UART_CONFIG:
 	ldi r16, 0b00000110
@@ -82,8 +108,7 @@ UART_FREE:
 	ret
 
 delay_1000ms:		;Función para retrasar
-
-	ldi r22, 19	
+	ldi r22, 9
 
 repetir2:
 
