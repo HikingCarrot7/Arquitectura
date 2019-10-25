@@ -11,9 +11,9 @@
     <OutputFileExtension>.obj</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <Language>ASSEMBLY</Language>
-    <AssemblyName>Prueba1</AssemblyName>
-    <Name>Prueba1</Name>
-    <RootNamespace>Prueba1</RootNamespace>
+    <AssemblyName>ContadorMejorado</AssemblyName>
+    <Name>ContadorMejorado</Name>
+    <RootNamespace>ContadorMejorado</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <EntryFile>$(MSBuildProjectDirectory)\main.asm</EntryFile>
     <KeepTimersRunning>true</KeepTimersRunning>

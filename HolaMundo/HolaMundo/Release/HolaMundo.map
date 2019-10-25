@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Prueba1\Prueba1\main.asm Thu Oct 24 20:39:57 2019
+AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\HolaMundo\HolaMundo\main.asm Thu Oct 24 21:09:10 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -695,4 +695,8 @@ EQU  ACIaddr      0000002e
 EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
-CSEG start        00000000
+CSEG start        00000001
+CSEG UART_CONFIG  00000028
+CSEG CICLO        00000006
+CSEG UART_TRANSMIT 00000035
+CSEG UART_FREE    0000003a
