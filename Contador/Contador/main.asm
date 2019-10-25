@@ -15,7 +15,6 @@ start:
 	out DDRD, r16 		; configura el prt D como entrada
 	nop
 	
-	
 CICLO:
 	in r21, PIND 		; lee entrada del puerto B
 	sbis PIND, 7 		;Si el bit de la posicion 0 es 1 se salta un registro, sino continua normal
