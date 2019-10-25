@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm Thu Oct 24 21:11:21 2019
+AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm Thu Oct 24 23:01:50 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
 C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
@@ -1037,48 +1037,69 @@ C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMe
                                  #endif  /* _M328PDEF_INC_ */
                                  
                                  ; ***** END OF FILE ******************************************************
-                                 .org 0X00
+                                 .org 0x00
                                  
-000000 c000                      RJMP start
-                                 ; Replace with your application code
+000000 c000                      rjmp start
+                                 
                                  start:
-000001 e020                      	ldi r18, 0b00000000
-000002 e201                          ldi r16, 0b00100001
-000003 b904                      	out DDRB, r16
-000004 0000                      	nop 
-000005 940e 000e                 	call UART_CONFIG
-                                  
+000001 e320                      	ldi r18, 0b00110000
+000002 e04a                      	ldi r20, 10				; registro bandera para reiniciar el ciclo.
+000003 b92a                      	out	DDRD, r18			;Configura el prt D como entrada.
+000004 b904                      	out DDRB, r16
+                                 
+000005 0000                      	nop 
+                                 
+000006 940e 0019                 	call UART_CONFIG
+                                 
                                  CICLO:
+000008 b159                      	in r21, PIND 			;Lee entrada del puerto D.
+000009 9b4f                      	sbis PIND, 7 			;Si el bit de la posicion 0 es 1 se salta un registro, sino continua normal.
+00000a c002                      	rjmp BOTON_ON
+00000b c00b                      	rjmp BOTON_OFF
+00000c cffb                      	rjmp CICLO
+                                 
+                                 BOTON_ON:
+                                 
+00000d f3d0                      	brbs 0, CICLO 			; Si el bit C del Rr SERG = 1, regresa a ciclo
+                                 
+00000e 2f02                      	mov r16, r18
+00000f 940e 0026                 	call UART_TRANSMIT
                                  	
-000007 2f02                      	mov r16, r18
-000008 940e 001b                 	call UART_TRANSMIT
-00000a 9523                      	inc r18
-00000b 3f2f                      	cpi r18, 255
-00000c f3a1                      	BREQ start
-00000d cff9                      	RJMP CICLO
+000011 954a                      	dec r20					; controla las repeticiones 
+000012 3040                      	cpi r20, 0 				; compara que el r21 sea igual a 0
+000013 f369                      	breq start 				; si el r21  = 0 brinca a start
+                                 	
+000014 9523                      	inc r18
+                                 
+000015 9408                      	sec 					;activar bandera de SERG en el bit C=1
+000016 cff1                      	rjmp CICLO
+                                 
+                                 BOTON_OFF:
+000017 9488                      	clc						;vuelve 0 el bit C de Rr SERG
+000018 cfef                      	rjmp CICLO
                                  
                                  UART_CONFIG:
-00000e e006                      	ldi r16, 0b00000110
-00000f 9300 00c2                 	sts UCSR0C, r16
+000019 e006                      	ldi r16, 0b00000110
+00001a 9300 00c2                 	sts UCSR0C, r16
                                  
-000011 e010                      	ldi r17, 0b00000000
-000012 e607                      	ldi r16, 0b01100111
+00001c e010                      	ldi r17, 0b00000000
+00001d e607                      	ldi r16, 0b01100111
                                  
-000013 9310 00c5                 	sts UBRR0H, r17
-000015 9300 00c4                 	sts UBRR0L, r16
+00001e 9310 00c5                 	sts UBRR0H, r17
+000020 9300 00c4                 	sts UBRR0L, r16
                                  
-000017 e108                      	ldi r16, 0b00011000
-000018 9300 00c1                 	sts UCSR0B, r16
-00001a 9508                      	ret
+000022 e108                      	ldi r16, 0b00011000
+000023 9300 00c1                 	sts UCSR0B, r16
+000025 9508                      	ret
                                  
                                  UART_TRANSMIT:
-00001b 9110 00c0                 	LDS r17, UCSR0A
-00001d fb15                      	bst r17, 5
-00001e f00e                      	BRTS UART_FREE
-00001f cffb                      	rjmp UART_TRANSMIT
+000026 9110 00c0                 	lds r17, UCSR0A
+000028 fb15                      	bst r17, 5
+000029 f00e                      	brts UART_FREE
+00002a cffb                      	rjmp UART_TRANSMIT
                                  
                                  UART_FREE:
-000020 9300 00c6                 	sts UDR0, r16
+00002b 9300 00c6                 	sts UDR0, r16
 
 
 RESOURCE USE INFORMATION
@@ -1098,37 +1119,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  10 r17:   4 r18:   4 r19:   0 r20:   0 
-r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:   9 r17:   4 r18:   4 r19:   0 r20:   3 
+r21:   1 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
-Registers used: 3 out of 35 (8.6%)
+Registers used: 5 out of 35 (14.3%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   1 
 brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   1 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   1 call  :   2 cbi   :   0 cbr   :   0 
-clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
+clc   :   1 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   0 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   1 jmp   :   0 
+cpi   :   1 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   1 jmp   :   0 
 ld    :   0 ldd   :   0 ldi   :   6 lds   :   1 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   1 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :   1 pop   :   0 
-push  :   0 rcall :   0 ret   :   2 reti  :   0 rjmp  :   3 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
-sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
+neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :   2 pop   :   0 
+push  :   0 rcall :   0 ret   :   2 reti  :   0 rjmp  :   7 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   1 
+sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   1 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   5 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 14 out of 113 (12.4%)
+Instructions used: 20 out of 113 (17.7%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000046     70      0     70   32768   0.2%
+[.cseg] 0x000000 0x00005c     92      0     92   32768   0.3%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

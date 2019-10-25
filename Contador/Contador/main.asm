@@ -3,6 +3,9 @@
 ; Created: 17/10/2019 03:43:28 p. m.
 ; Author : emman
 ;
+.include<m328pdef.inc>
+.org 0x00
+
 rjmp start
 
 start:
@@ -14,7 +17,6 @@ start:
 	out DDRB, r18 		; configura el puerto B como salida
 	out DDRD, r16 		; configura el prt D como entrada
 	nop
-	
 	
 CICLO:
 	in r21, PIND 		; lee entrada del puerto B

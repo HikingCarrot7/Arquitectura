@@ -23,9 +23,11 @@
  </OUTPUT_FILES>
  <LABELS>
   <start><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>13</LINE></start>
-  <UART_CONFIG><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>29</LINE></UART_CONFIG>
-  <CICLO><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>20</LINE></CICLO>
-  <UART_TRANSMIT><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>43</LINE></UART_TRANSMIT>
-  <UART_FREE><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>49</LINE></UART_FREE>
+  <UART_CONFIG><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>50</LINE></UART_CONFIG>
+  <CICLO><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>23</LINE></CICLO>
+  <BOTON_ON><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>30</LINE></BOTON_ON>
+  <BOTON_OFF><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>46</LINE></BOTON_OFF>
+  <UART_TRANSMIT><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>64</LINE></UART_TRANSMIT>
+  <UART_FREE><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm</FILE><LINE>70</LINE></UART_FREE>
  </LABELS>
 </ASSEMBLER_INFO>
