@@ -3,6 +3,9 @@
 ; Created: 17/10/2019 03:43:28 p. m.
 ; Author : emman
 ;
+.include<m328pdef.inc>
+.org 0x00
+
 rjmp start
 
 start:

@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm Thu Oct 24 21:11:21 2019
+AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\ContadorMejorado\ContadorMejorado\main.asm Thu Oct 24 23:01:50 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -696,7 +696,9 @@ EQU  TWIaddr      00000030
 EQU  SPMRaddr     00000032
 EQU  INT_VECTORS_SIZE 00000034
 CSEG start        00000001
-CSEG UART_CONFIG  0000000e
-CSEG CICLO        00000007
-CSEG UART_TRANSMIT 0000001b
-CSEG UART_FREE    00000020
+CSEG UART_CONFIG  00000019
+CSEG CICLO        00000008
+CSEG BOTON_ON     0000000d
+CSEG BOTON_OFF    00000017
+CSEG UART_TRANSMIT 00000026
+CSEG UART_FREE    0000002b

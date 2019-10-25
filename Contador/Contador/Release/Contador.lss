@@ -1,8 +1,10 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador\Contador\main.asm Thu Oct 24 22:11:55 2019
+AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador\Contador\main.asm Thu Oct 24 22:28:14 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador\Contador\main.asm(6): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador\Contador\main.asm(6): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
                                  
                                  ; Interruptor_Contador.asm
                                  
@@ -989,18 +991,63 @@ AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador
                                  ; Created: 17/10/2019 03:43:28 p. m.
                                  ; Author : emman
                                  ;
+                                 .include<m328pdef.inc>
+                                 
+                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
+                                 ;*************************************************************************
+                                 ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
+                                 ;* 
+                                 ;* Number            : AVR000
+                                 ;* File Name         : "m328Pdef.inc"
+                                 ;* Title             : Register/Bit Definitions for the ATmega328P
+                                 ;* Date              : 2011-02-09
+                                 ;* Version           : 2.35
+                                 ;* Support E-mail    : avr@atmel.com
+                                 ;* Target MCU        : ATmega328P
+                                 ;* 
+                                 ;* DESCRIPTION
+                                 ;* When including this file in the assembly program file, all I/O register 
+                                 ;* names and I/O register bit names appearing in the data book can be used.
+                                 ;* In addition, the six registers forming the three data pointers X, Y and 
+                                 ;* Z have been assigned names XL - ZH. Highest RAM address for Internal 
+                                 ;* SRAM is also defined 
+                                 ;* 
+                                 ;* The Register names are represented by their hexadecimal address.
+                                 ;* 
+                                 ;* The Register Bit names are represented by their bit number (0-7).
+                                 ;* 
+                                 ;* Please observe the difference in using the bit names with instructions
+                                 ;* such as "sbr"/"cbr" (set/clear bit in register) and "sbrs"/"sbrc"
+                                 ;* (skip if bit in register set/cleared). The following example illustrates
+                                 ;* this:
+                                 ;* 
+                                 ;* in    r16,PORTB             ;read PORTB latch
+                                 ;* sbr   r16,(1<<PB6)+(1<<PB5) ;set PB6 and PB5 (use masks, not bit#)
+                                 ;* out   PORTB,r16             ;output to PORTB
+                                 ;* 
+                                 ;* in    r16,TIFR              ;read the Timer Interrupt Flag Register
+                                 ;* sbrc  r16,TOV0              ;test the overflow flag (use bit#)
+                                 ;* rjmp  TOV0_is_set           ;jump if set
+                                 ;* ...                         ;otherwise do something else
+                                 ;*************************************************************************
+                                 
+                                 #ifndef _M328PDEF_INC_
+                                 #endif  /* _M328PDEF_INC_ */
+                                 
+                                 ; ***** END OF FILE ******************************************************
+                                 .org 0x00
+                                 
 000000 c000                      rjmp start
                                  
                                  start:
 000001 e000                      	ldi r16, 0b00000000 ; registro para configurar puertos de entrada
-000002 e010                      	ldi r17, 0b00000000 ; registro para encender los leds el cual se incrementarï¿½ 
+000002 e010                      	ldi r17, 0b00000000 ; registro para encender los leds el cual se incrementará 
 000003 ef2f                      	ldi r18, 0b11111111 ; registro para configurar puertos de salida
 000004 e34f                      	ldi r20, 63			; registro para decrementar el ciclo
                                  	
 000005 b924                      	out DDRB, r18 		; configura el puerto B como salida
 000006 b90a                      	out DDRD, r16 		; configura el prt D como entrada
 000007 0000                      	nop
-                                 	
                                  	
                                  CICLO:
 000008 b159                      	in r21, PIND 		; lee entrada del puerto B
@@ -1023,7 +1070,7 @@ AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador
 000014 cff3                      	rjmp CICLO
                                  
                                  BOTON_OFF:
-000015 b915                      	out PORTB, r17			;Envia el cï¿½digo para apagar el LED
+000015 b915                      	out PORTB, r17			;Envia el código para apagar el LED
 000016 9488                      	clc						;vuelve 0 el bit C de Rr SERG
 000017 cff0                      	rjmp CICLO
 
