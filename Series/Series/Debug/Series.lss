@@ -1,10 +1,12 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador\Contador\main.asm Thu Oct 24 22:11:55 2019
+AVRASM ver. 2.2.7  C:\Users\HikingC7\Documents\GitHub\Arquitectura\Series\Series\main.asm Thu Oct 24 22:23:48 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingC7\Documents\GitHub\Arquitectura\Series\Series\main.asm(4): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingC7\Documents\GitHub\Arquitectura\Series\Series\main.asm(4): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
                                  
-                                 ; Interruptor_Contador.asm
+                                 
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -985,47 +987,164 @@ AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Contador
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ;
-                                 ; Created: 17/10/2019 03:43:28 p. m.
-                                 ; Author : emman
-                                 ;
-000000 c000                      rjmp start
+                                 
+                                 
+                                 .include <m328pdef.inc>
+                                 
+                                 ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
+                                 ;*************************************************************************
+                                 ;* A P P L I C A T I O N   N O T E   F O R   T H E   A V R   F A M I L Y
+                                 ;* 
+                                 ;* Number            : AVR000
+                                 ;* File Name         : "m328Pdef.inc"
+                                 ;* Title             : Register/Bit Definitions for the ATmega328P
+                                 ;* Date              : 2011-02-09
+                                 ;* Version           : 2.35
+                                 ;* Support E-mail    : avr@atmel.com
+                                 ;* Target MCU        : ATmega328P
+                                 ;* 
+                                 ;* DESCRIPTION
+                                 ;* When including this file in the assembly program file, all I/O register 
+                                 ;* names and I/O register bit names appearing in the data book can be used.
+                                 ;* In addition, the six registers forming the three data pointers X, Y and 
+                                 ;* Z have been assigned names XL - ZH. Highest RAM address for Internal 
+                                 ;* SRAM is also defined 
+                                 ;* 
+                                 ;* The Register names are represented by their hexadecimal address.
+                                 ;* 
+                                 ;* The Register Bit names are represented by their bit number (0-7).
+                                 ;* 
+                                 ;* Please observe the difference in using the bit names with instructions
+                                 ;* such as "sbr"/"cbr" (set/clear bit in register) and "sbrs"/"sbrc"
+                                 ;* (skip if bit in register set/cleared). The following example illustrates
+                                 ;* this:
+                                 ;* 
+                                 ;* in    r16,PORTB             ;read PORTB latch
+                                 ;* sbr   r16,(1<<PB6)+(1<<PB5) ;set PB6 and PB5 (use masks, not bit#)
+                                 ;* out   PORTB,r16             ;output to PORTB
+                                 ;* 
+                                 ;* in    r16,TIFR              ;read the Timer Interrupt Flag Register
+                                 ;* sbrc  r16,TOV0              ;test the overflow flag (use bit#)
+                                 ;* rjmp  TOV0_is_set           ;jump if set
+                                 ;* ...                         ;otherwise do something else
+                                 ;*************************************************************************
+                                 
+                                 #ifndef _M328PDEF_INC_
+                                 #endif  /* _M328PDEF_INC_ */
+                                 
+                                 ; ***** END OF FILE ******************************************************
+                                 .org 0x00
+                                 
+                                 ;PUERTOD
+000000 e041                      	ldi r20, 0b00000001
+000001 e052                      	ldi r21, 0b00000010
+000002 e064                      	ldi r22, 0b00000100
+000003 e078                      	ldi r23, 0b00001000
+000004 e180                      	ldi r24, 0b00010000
+000005 e290                      	ldi r25, 0b00100000
+000006 e4a0                      	ldi r26, 0b01000000
+000007 e8b0                      	ldi r27, 0b10000000
+000008 efcf                      	ldi r28, 0b11111111
+000009 e0d0                      	ldi r29, 0b00000000
+                                 
+                                 ;CONFIGURACION DE LOS PUERTO
+00000a b9ca                      	out DDRD, r28
+00000b b9c4                      	out DDRB, r28
+                                 
+00000c c000                      	rjmp start
                                  
                                  start:
-000001 e000                      	ldi r16, 0b00000000 ; registro para configurar puertos de entrada
-000002 e010                      	ldi r17, 0b00000000 ; registro para encender los leds el cual se incrementarï¿½ 
-000003 ef2f                      	ldi r18, 0b11111111 ; registro para configurar puertos de salida
-000004 e34f                      	ldi r20, 63			; registro para decrementar el ciclo
-                                 	
-000005 b924                      	out DDRB, r18 		; configura el puerto B como salida
-000006 b90a                      	out DDRD, r16 		; configura el prt D como entrada
-000007 0000                      	nop
-                                 	
-                                 	
-                                 CICLO:
-000008 b159                      	in r21, PIND 		; lee entrada del puerto B
-000009 9b4f                      	sbis PIND, 7 		;Si el bit de la posicion 0 es 1 se salta un registro, sino continua normal
-00000a c002                      	rjmp BOTON_ON
-00000b c009                      	rjmp BOTON_OFF
-00000c cffb                      	rjmp CICLO
                                  
-                                 BOTON_ON:
-00000d b915                      	out PORTB, r17		; Enciende el led
-                                 	
-00000e f3c8                      	brbs 0, CICLO 		; Si el bit C del Rr SERG = 1, regresa a ciclo
-                                 	
-00000f 954a                      	dec r20				; controla las repeticiones 
-000010 3040                      	cpi r20, 0 			; compara que el r21 sea igual a 0
-000011 f379                      	breq start 			; si el r21  = 0 brinca a start
-                                 	
-000012 9408                      	sec 				;activar bandera de SERG en el bit C=1
-000013 9513                      	inc r17 			; incrementa r17
-000014 cff3                      	rjmp CICLO
+00000d 940e 0049                 	call delay_1000ms
+00000f b94b                      	out PORTD, r20
                                  
-                                 BOTON_OFF:
-000015 b915                      	out PORTB, r17			;Envia el cï¿½digo para apagar el LED
-000016 9488                      	clc						;vuelve 0 el bit C de Rr SERG
-000017 cff0                      	rjmp CICLO
+000010 940e 0049                 	call delay_1000ms
+000012 b95b                      	out PORTD, r21
+                                 	
+000013 940e 0049                 	call delay_1000ms
+000015 b96b                      	out PORTD, r22
+                                 	
+000016 940e 0049                 	call delay_1000ms
+000018 b97b                      	out PORTD, r23
+                                 	
+000019 940e 0049                 	call delay_1000ms
+00001b b98b                      	out PORTD, r24
+                                 	
+00001c 940e 0049                 	call delay_1000ms
+00001e b99b                      	out PORTD, r25
+                                 	
+00001f 940e 0049                 	call delay_1000ms
+000021 b9ab                      	out PORTD, r26
+                                 	
+000022 940e 0049                 	call delay_1000ms
+000024 b9bb                      	out PORTD, r27
+                                 	
+000025 940e 0049                 	call delay_1000ms
+000027 b9db                      	out PORTD, r29
+000028 b945                      	out PORTB, r20
+                                 	
+000029 940e 0049                 	call delay_1000ms
+00002b b955                      	out PORTB, r21
+                                 
+00002c 940e 002f                 	call reverso
+                                 	
+00002e cfde                      	rjmp start
+                                 	
+                                 reverso:
+                                 
+00002f 940e 0049                 	call delay_1000ms
+000031 b945                      	out PORTB,  r20
+                                 	
+000032 940e 0049                 	call delay_1000ms
+000034 b9d5                      	out PORTB, r29
+000035 b9bb                      	out PORTD, r27
+                                 	
+000036 940e 0049                 	call delay_1000ms
+000038 b9ab                      	out PORTD, r26
+                                 	
+000039 940e 0049                 	call delay_1000ms
+00003b b99b                      	out PORTD, r25
+                                 	
+00003c 940e 0049                 	call delay_1000ms
+00003e b98b                      	out PORTD, r24
+                                 	
+00003f 940e 0049                 	call delay_1000ms
+000041 b97b                      	out PORTD, r23
+                                 	
+000042 940e 0049                 	call delay_1000ms
+000044 b96b                      	out PORTD, r22
+                                 	
+000045 940e 0049                 	call delay_1000ms
+000047 b95b                      	out PORTD, r21
+                                 	
+000048 9508                      	ret
+                                 
+                                 delay_1000ms: ;Función para retrasar
+                                 
+000049 e026                      	ldi r18, 6  ;Debe ser 99
+                                 
+                                 repetir2:
+                                 
+00004a e603                      	ldi r16, 99
+                                 
+                                 repetir1:
+                                 
+00004b ec17                      	ldi r17, 199
+                                 
+                                 repetir:
+                                 
+00004c 0000                      	nop
+00004d 0000                      	nop
+00004e 0000                      	nop
+00004f 0000                      	nop
+000050 0000                      	nop
+000051 951a                      	dec r17
+000052 f7c9                      	brne repetir ;2 ciclos
+000053 950a                      	dec r16
+000054 f7b1                      	brne repetir1
+000055 952a                      	dec r18
+000056 f799                      	brne repetir2
+                                 	
 
 
 RESOURCE USE INFORMATION
@@ -1045,37 +1164,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:   2 r17:   4 r18:   2 r19:   0 r20:   3 
-r21:   1 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
-r29:   0 r30:   0 r31:   0 
-Registers used: 5 out of 35 (14.3%)
+r13:   0 r14:   0 r15:   0 r16:   2 r17:   2 r18:   2 r19:   0 r20:   4 
+r21:   4 r22:   3 r23:   3 r24:   3 r25:   3 r26:   3 r27:   3 r28:   3 
+r29:   3 r30:   0 r31:   0 
+Registers used: 13 out of 35 (37.1%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
-andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   1 
-brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
+andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   0 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   0 call  :   0 cbi   :   0 cbr   :   0 
-clc   :   1 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
+brne  :   3 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :  19 cbi   :   0 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   1 cpse  :   0 dec   :   1 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   1 jmp   :   0 
-ld    :   0 ldd   :   0 ldi   :   4 lds   :   0 lpm   :   0 lsl   :   0 
+cpi   :   0 cpse  :   0 dec   :   3 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   0 jmp   :   0 
+ld    :   0 ldd   :   0 ldi   :  13 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
-neg   :   0 nop   :   1 or    :   0 ori   :   0 out   :   4 pop   :   0 
-push  :   0 rcall :   0 ret   :   0 reti  :   0 rjmp  :   6 rol   :   0 
-ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   1 
-sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   1 seh   :   0 
+neg   :   0 nop   :   5 or    :   0 ori   :   0 out   :  22 pop   :   0 
+push  :   0 rcall :   0 ret   :   2 reti  :   0 rjmp  :   2 rol   :   0 
+ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
+sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 13 out of 113 (11.5%)
+Instructions used: 8 out of 113 (7.1%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000030     48      0     48   32768   0.1%
+[.cseg] 0x000000 0x0000b0    176      0    176   32768   0.5%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
