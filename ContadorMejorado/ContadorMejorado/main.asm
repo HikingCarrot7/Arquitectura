@@ -21,6 +21,7 @@ start:
 	call UART_CONFIG
 
 CICLO:
+	call delay_1000ms
 	in r21, PIND 			;Lee entrada del puerto D.
 	sbis PIND, 7 			;Si el bit de la posicion 0 es 1 se salta un registro, sino continua normal.
 	rjmp BOTON_ON
@@ -33,12 +34,16 @@ BOTON_ON:
 
 	mov r16, r18
 	call UART_TRANSMIT
+
+	ldi r25, 10
+	mov r16, r25
+	call UART_TRANSMIT
 	
 	dec r20					; controla las repeticiones 
 	cpi r20, 0 				; compara que el r21 sea igual a 0
 	breq start 				; si el r21  = 0 brinca a start
 	
-	inc r18
+	call CONTADOR
 
 	sec 					;activar bandera de SERG en el bit C=1
 	rjmp CICLO
@@ -46,6 +51,11 @@ BOTON_ON:
 BOTON_OFF:
 	clc						;vuelve 0 el bit C de Rr SERG
 	rjmp CICLO
+
+CONTADOR:
+	inc r18
+	ret
+
 
 UART_CONFIG:
 	ldi r16, 0b00000110
@@ -69,4 +79,32 @@ UART_TRANSMIT:
 
 UART_FREE:
 	sts UDR0, r16
+	ret
+
+delay_1000ms:		;Función para retrasar
+
+	ldi r22, 19	
+
+repetir2:
+
+	ldi r23, 99
+
+repetir1:
+
+	ldi r24, 199
+
+repetir:
+
+	nop
+	nop
+	nop
+	nop
+	nop
+	dec r24
+	brne repetir ;2 ciclos
+	dec r23
+	brne repetir1
+	dec r22
+	brne repetir2
+	
 	ret
