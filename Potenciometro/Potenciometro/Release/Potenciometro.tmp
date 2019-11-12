@@ -22,23 +22,23 @@
   <FILE>Potenciometro.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <start><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>21</LINE></start>
-  <UART_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>122</LINE></UART_CONFIG>
-  <ADC_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>101</LINE></ADC_CONFIG>
-  <CICLO><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>38</LINE></CICLO>
-  <ADC_READ><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>109</LINE></ADC_READ>
-  <ASCII><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>76</LINE></ASCII>
-  <UART_TRANSMIT><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>136</LINE></UART_TRANSMIT>
-  <delay_500ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>170</LINE></delay_500ms>
-  <L_CENTENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>77</LINE></L_CENTENA>
-  <L_DECENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>84</LINE></L_DECENA>
-  <L_UNIDAD><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>91</LINE></L_UNIDAD>
-  <L_FIN><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>98</LINE></L_FIN>
-  <delay_10ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>149</LINE></delay_10ms>
-  <CICLO_ADC><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>114</LINE></CICLO_ADC>
-  <UART_FREE><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>144</LINE></UART_FREE>
-  <repetir1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>153</LINE></repetir1>
-  <repetir><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>157</LINE></repetir>
-  <delay_100ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>178</LINE></delay_100ms>
+  <start><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>18</LINE></start>
+  <UART_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>119</LINE></UART_CONFIG>
+  <ADC_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>98</LINE></ADC_CONFIG>
+  <CICLO><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>35</LINE></CICLO>
+  <ADC_READ><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>106</LINE></ADC_READ>
+  <ASCII><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>73</LINE></ASCII>
+  <UART_TRANSMIT><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>133</LINE></UART_TRANSMIT>
+  <delay_500ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>166</LINE></delay_500ms>
+  <L_CENTENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>74</LINE></L_CENTENA>
+  <L_DECENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>81</LINE></L_DECENA>
+  <L_UNIDAD><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>88</LINE></L_UNIDAD>
+  <L_FIN><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>95</LINE></L_FIN>
+  <delay_10ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>145</LINE></delay_10ms>
+  <CICLO_ADC><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>111</LINE></CICLO_ADC>
+  <UART_FREE><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>140</LINE></UART_FREE>
+  <repetir1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>149</LINE></repetir1>
+  <repetir><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>153</LINE></repetir>
+  <delay_100ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm</FILE><LINE>174</LINE></delay_100ms>
  </LABELS>
 </ASSEMBLER_INFO>

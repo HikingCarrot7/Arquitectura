@@ -3,10 +3,7 @@
 ;
 ; Created: 12/11/2019 11:23:55 a. m.
 ; Author : HikingC7
-;
 
-
-; Replace with your application code
 
 .include<m328pdef.inc>
 
@@ -134,7 +131,6 @@ UART_CONFIG:
 	ret
 
 UART_TRANSMIT:
-
 	lds r17, UCSR0A
 
 	bst r17, 5
