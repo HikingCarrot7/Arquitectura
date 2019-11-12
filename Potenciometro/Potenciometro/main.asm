@@ -68,35 +68,35 @@ CICLO:
 	out PORTB, r16
 	call delay_500ms
 	ldi r16, 0b00000000
-	out PORTB,r16
+	out PORTB, r16
 	call delay_500ms
 
 	rjmp CICLO
 
 ASCII:
-L_CENTENA:
-	cpi r16, 100
-	BRLO L_DECENA
-	inc centena
-	subi r16, 100
-	rjmp L_CENTENA
+	L_CENTENA:
+		cpi r16, 100
+		brlo L_DECENA
+		inc centena
+		subi r16, 100
+		rjmp L_CENTENA
 
-L_DECENA:
-	cpi r16, 10
-	BRLO L_UNIDAD
-	inc decena
-	subi r16, 10
-	rjmp L_DECENA
+	L_DECENA:
+		cpi r16, 10
+		brlo L_UNIDAD
+		inc decena
+		subi r16, 10
+		rjmp L_DECENA
 
-L_UNIDAD:
-	cpi r16, 1
-	BRLO L_FIN
-	inc unidad
-	subi r16, 1
-	rjmp L_UNIDAD
+	L_UNIDAD:
+		cpi r16, 1
+		brlo L_FIN
+		inc unidad
+		subi r16, 1
+		rjmp L_UNIDAD
 
-L_FIN:
-	ret
+	L_FIN:
+		ret
 
 ADC_CONFIG:
 	ldi r16, 0b01100000
@@ -110,7 +110,6 @@ ADC_READ:
 	ldi r16, 0b11000000
 	sts ADCSRA, r16
 	call delay_10ms
-	ret
 
 CICLO_ADC:
 	lds r16, ADCSRA
@@ -125,7 +124,7 @@ UART_CONFIG:
 	sts UCSR0C, r16
 
 	ldi r17, 0b00000000
-	ldi r18, 0b01100111
+	ldi r16, 0b01100111
 
 	sts UBRR0H, r17 
 	sts UBRR0L, r16 
@@ -136,7 +135,7 @@ UART_CONFIG:
 
 UART_TRANSMIT:
 
-	LDS r17, UCSR0A
+	lds r17, UCSR0A
 
 	bst r17, 5
 	brts UART_FREE
@@ -165,6 +164,15 @@ repetir:
 	brne repetir
 	dec r17
 	brne repetir1
+
+	ret
+
+delay_500ms:
+	call delay_100ms
+	call delay_100ms
+	call delay_100ms
+	call delay_100ms
+	call delay_100ms
 	ret
 
 delay_100ms:
@@ -178,13 +186,4 @@ delay_100ms:
 	call delay_10ms
 	call delay_10ms
 	call delay_10ms
-	ret
-
-
-delay_500ms:
-	call delay_100ms
-	call delay_100ms
-	call delay_100ms
-	call delay_100ms
-	call delay_100ms
 	ret

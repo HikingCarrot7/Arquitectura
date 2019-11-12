@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm Tue Nov 12 14:00:31 2019
+AVRASM ver. 2.2.7  C:\Users\HikingC7\Documents\GitHub\Arquitectura\Potenciometro\Potenciometro\main.asm Tue Nov 12 14:31:42 2019
 
 
 EQU  SIGNATURE_000 0000001e
@@ -699,20 +699,20 @@ DEF  unidad       r20
 DEF  decena       r21
 DEF  centena      r22
 CSEG start        00000001
-CSEG UART_CONFIG  00000056
+CSEG UART_CONFIG  00000055
 CSEG ADC_CONFIG   0000003e
 CSEG CICLO        0000000d
 CSEG ADC_READ     00000047
 CSEG ASCII        0000002e
-CSEG UART_TRANSMIT 00000063
-CSEG delay_500ms  0000008c
+CSEG UART_TRANSMIT 00000062
+CSEG delay_500ms  00000076
 CSEG L_CENTENA    0000002e
 CSEG L_DECENA     00000033
 CSEG L_UNIDAD     00000038
 CSEG L_FIN        0000003d
-CSEG delay_10ms   0000006b
-CSEG CICLO_ADC    0000004d
-CSEG UART_FREE    00000068
-CSEG repetir1     0000006c
-CSEG repetir      0000006d
-CSEG delay_100ms  00000077
+CSEG delay_10ms   0000006a
+CSEG CICLO_ADC    0000004c
+CSEG UART_FREE    00000067
+CSEG repetir1     0000006b
+CSEG repetir      0000006c
+CSEG delay_100ms  00000081
