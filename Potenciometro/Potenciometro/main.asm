@@ -20,12 +20,6 @@ start:
 	ldi decena, 0
 	ldi centena, 0
 
-	ldi r16, 0b00100000
-	out DDRB, r16
-
-	ldi r16, 0b00000000
-	out DDRC, r16
-
 	nop
 
 	call UART_CONFIG
@@ -97,7 +91,7 @@ ASCII:
 ADC_CONFIG:
 	ldi r16, 0b01100000
 	sts ADMUX, r16	
-	ldi r16, 0b10000000
+	ldi r16, 0b11000000
 	sts ADCSRA, r16	
 	call delay_10ms	
 	ret
@@ -140,7 +134,8 @@ UART_FREE:
 	sts UDR0, r16
 	ret
 
-;Rutina
+
+;Rutina de retardo
 delay_10ms:
 	
 	ldi r17, 99
