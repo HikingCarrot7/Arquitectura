@@ -54,44 +54,38 @@ CICLO:
 	ldi r16, 10
 	call UART_TRANSMIT
 
-	ldi r16, 0b00100000
-	out PORTB, r16
-	call delay_500ms
-	ldi r16, 0b00000000
-	out PORTB, r16
-	call delay_500ms
-
 	rjmp CICLO
 
 ASCII:
 	L_CENTENA:
 		cpi r16, 100
-		brlo L_DECENA
+		breq L_DECENA
 		inc centena
 		subi r16, 100
 		rjmp L_CENTENA
 
 	L_DECENA:
 		cpi r16, 10
-		brlo L_UNIDAD
+		breq L_UNIDAD
 		inc decena
 		subi r16, 10
 		rjmp L_DECENA
 
 	L_UNIDAD:
 		cpi r16, 1
-		brlo L_FIN
+		breq L_FIN
 		inc unidad
 		subi r16, 1
 		rjmp L_UNIDAD
 
 	L_FIN:
 		ret
+ret
 
 ADC_CONFIG:
 	ldi r16, 0b01100000
 	sts ADMUX, r16	
-	ldi r16, 0b11000000
+	ldi r16, 0b10000000
 	sts ADCSRA, r16	
 	call delay_10ms	
 	ret
