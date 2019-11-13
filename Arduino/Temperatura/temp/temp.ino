@@ -12,7 +12,7 @@ void loop() {
 
   for (int i = 0; i < 5; i++)
   {
-
+    
     SENSOR = analogRead(A0);
     TEMPERATURA  = ((SENSOR * 5000.0) / 1023) / 10;
     SUMA += TEMPERATURA;

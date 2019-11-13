@@ -22,7 +22,7 @@ import java.util.TooManyListenersException;
 public class EnvioDatos implements SerialPortEventListener
 {
 
-    private final String PUERTO = "COM4";
+    private final String PUERTO = "COM3";
     private final int TIMEOUT = 2000;
     private final int DATA_RATE = 9600;
     private BufferedReader input;
@@ -120,9 +120,9 @@ public class EnvioDatos implements SerialPortEventListener
     }
 
     @Override
-    public void serialEvent(SerialPortEvent spe)
+    public void serialEvent(SerialPortEvent e)
     {
-        if (spe.getEventType() == SerialPortEvent.DATA_AVAILABLE)
+        if (e.getEventType() == SerialPortEvent.DATA_AVAILABLE)
             try
             {
 
