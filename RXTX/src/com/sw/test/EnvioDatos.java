@@ -71,7 +71,6 @@ public class EnvioDatos implements SerialPortEventListener
         } catch (PortInUseException | UnsupportedCommOperationException | TooManyListenersException | IOException ex)
         {
             System.out.println(ex.getMessage());
-
         }
 
     }
@@ -126,11 +125,11 @@ public class EnvioDatos implements SerialPortEventListener
         if (spe.getEventType() == SerialPortEvent.DATA_AVAILABLE)
             try
             {
+
                 System.out.println(input.readLine());
 
-                Thread.sleep(1000);
-
-            } catch (IOException | InterruptedException ex)
+                //Thread.sleep(1000);
+            } catch (IOException ex)
             {
                 System.out.println(ex.getMessage());
             }
