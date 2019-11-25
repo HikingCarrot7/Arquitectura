@@ -1,7 +1,6 @@
-; MiEnsamblador.asm
 ;
 ; Created: 30/09/2019 02:31:44 p. m.
-; Author : aaron
+; Author : El Equipo MOHAMED
 ;
 
 
@@ -12,6 +11,7 @@
 .def unidad = r20
 .def decena = r21
 .def centena = r22
+.def decimal = r23
 
 
 
@@ -23,6 +23,7 @@ START:
     ldi        unidad, 0
     ldi        decena, 0
     ldi        centena, 0
+	
 
                                 ;DDRx: 1 = Salida, 0 = entrada
     ldi        r16,0b00100000        ;configura PB0 como entrada y PB5 (LED) como salida
@@ -41,20 +42,20 @@ START:
 CICLO:
     call adcRead
     call adcWait
-    lds r18, ADCL  ; Must read ADCL first, and ADCH after that
+	lds r18, ADCL
     lds r19, ADCH
 
 
-    ldi        unidad, 0
-    ldi        decena, 0
-    ldi        centena, 0
-
+    ldi unidad, 0
+    ldi decena, 0
+    ldi centena, 0
+	ldi decimal, 48
 
     
 
     ;call    ADC_READ            ;r18 -> ADCH , r17->ADCL
-    mov        r16, r19            ; r16 = r18
-                                ;dato a enviar en r16
+    mov r16, r18        ; r16 = r18
+	call DIVIDIR	                            ;dato a enviar en r16
 ;---convertir a ascii---------------
     call    ASCII
     
@@ -71,6 +72,12 @@ CICLO:
 
     mov        r16, unidad            
     call    UART_TRANSMIT
+
+	ldi r16, 46
+	call UART_TRANSMIT
+
+	mov r16, decimal
+	call UART_TRANSMIT
 
     ldi        r16, 10            ;dato a enviar
     call    UART_TRANSMIT
@@ -107,27 +114,7 @@ L_UNIDAD:
 L_FIN:
     ret
 
-;--------rutina del ADC---------------------
-ADC_CONFIG:
-    ldi        r16, 0b01100000        ;referencia interna<7:6>: 01, ADLAR <5>:1 -justificacion izquierda, ADC0 , prescalador 2
-    sts        ADMUX,r16
 
-    ldi        r16, 0b10000000        ;ADEN <7> = 1, enciende el ADC
-    sts        ADCSRA,r16
-    call    delay_100ms
-    ret
-
-ADC_READ:
-    ldi        r16, 0b11000000        ;ADEN <7> = 1, enciende el ADC, inicia la conversión ADSC <6>=1
-    sts        ADCSRA,r16
-    call    delay_100ms
-CICLO_ADC:
-    lds        r16, ADCSRA
-    sbrc    r16,ADSC            ;    brinca si ADSC = 0-> conversion finalizada
-    rjmp    CICLO_ADC            ;    ADSC permanece en 1 mientas la conversión no ha terminado
-    lds        r17,ADCL            ;   conversion terminada
-    lds        r18,ADCH            ;   Este registro contiene la parte significativa de la conversión
-    ret
 ;-----rutina para configurar USART---------
 UART_CONFIG:
     ldi        r16, 0b00000110        ;modo asincrono, paridad deshabilitada,8 bits de datos
@@ -154,9 +141,10 @@ UART_FREE:
     sts        UDR0,r16        ;envia el dato guardado en r16
     ret
 
-;-------------------------------------
+
+;---------------------------------Confiigurar ADC
 adcInit:
-    ldi r16, 0b01100000   ; Voltage Reference: AVcc with external capacitor at AREF pin
+    ldi r16, 0b01000000   ; Voltage Reference: AVcc with external capacitor at AREF pin
     sts ADMUX, r16        ; Enable ADC Left Adjust Result
                           ; Analog Channel: ADC0
 
@@ -183,6 +171,19 @@ adcWait:
     or  r17, r16          ;
     sts  ADCSRA, r17      ;
     ret
+
+
+;Dividir entre 2
+DIVIDIR:
+	lsr r16
+	brcs DECIMAL_1
+	nop
+ret
+
+DECIMAL_1:
+	ldi decimal, 53
+ret
+	
 
 
 ;--------rutina de retardo------------
