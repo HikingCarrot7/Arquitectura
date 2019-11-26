@@ -15,4 +15,6 @@ void loop()
 
   Serial.println("Hola desde arduino");
 
+  delay(500);
+
 }
