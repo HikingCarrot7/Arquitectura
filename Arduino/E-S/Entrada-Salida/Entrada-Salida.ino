@@ -12,9 +12,6 @@ void setup() {
 void loop()
 {
 
-  if (digitalRead(2) == HIGH)
-    Serial.println("Hola mundo");
-
   if (!bandera)
   {
 
