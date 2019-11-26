@@ -16,18 +16,17 @@ import java.util.Random;
  *
  * @author Mohammed
  */
-public class InterfazTemperatura implements Drawable, Runnable
+public class GraficaTemperatura implements Drawable, Runnable
 {
 
-    private final int DELAY = 500;
-    private int data;
-    private boolean dataAvailable;
-    private Point lastPoint;
-    private Camera camera;
     private ArrayList<Linea> lineas;
     private ArrayList<Animation> animaciones;
+    private Camera camera;
+    private Point lastPoint;
+    private int data;
+    private boolean dataAvailable;
 
-    public InterfazTemperatura(Camera camera)
+    public GraficaTemperatura(Camera camera)
     {
 
         this.camera = camera;
@@ -51,6 +50,8 @@ public class InterfazTemperatura implements Drawable, Runnable
     @Override
     public void render(Graphics2D g)
     {
+
+        camera.setStopCamera(false);
 
         dibujarRegla(g);
 
@@ -98,6 +99,7 @@ public class InterfazTemperatura implements Drawable, Runnable
         {
             g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
             g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
+
         }
 
     }
@@ -114,33 +116,10 @@ public class InterfazTemperatura implements Drawable, Runnable
 
         setDataAvailable(false);
 
-        moveCamera();
+        if (lineas.size() >= 10)
+            camera.moveCamera();
 
         lastPoint = nextPoint;
-
-    }
-
-    private void moveCamera()
-    {
-
-        if (lineas.size() >= 10)
-            new Thread(() ->
-            {
-
-                for (int i = 0; i < 40; i++)
-                    try
-                    {
-
-                        Thread.sleep(DELAY / 40);
-
-                        camera.setX(camera.getX() + 1);
-
-                    } catch (InterruptedException ex)
-                    {
-                        System.out.println(ex.getMessage());
-                    }
-
-            }).start();
 
     }
 
@@ -152,6 +131,18 @@ public class InterfazTemperatura implements Drawable, Runnable
     private Point getNextPoint()
     {
         return new Point(lastPoint.getIntegerX() + 40, Panel.ALTO - (getData() * 15) + 150);
+    }
+
+    public void reiniciarGrafica()
+    {
+
+        lineas.clear();
+        animaciones.clear();
+        camera.setStopCamera(true);
+        camera.setX(0);
+
+        lastPoint = new Point(60, Panel.ALTO);
+
     }
 
     public int getData()
@@ -182,7 +173,7 @@ public class InterfazTemperatura implements Drawable, Runnable
             try
             {
 
-                Thread.sleep(500);
+                Thread.sleep(Panel.DELAY);
                 setData(new Random().nextInt(30) + 15);
                 setDataAvailable(true);
 
