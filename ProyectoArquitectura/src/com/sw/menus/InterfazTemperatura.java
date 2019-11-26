@@ -19,7 +19,7 @@ import java.util.Random;
 public class InterfazTemperatura implements Drawable, Runnable
 {
 
-    private final int DELAY = 500;
+    private final int DELAY = 1200;
     private int data;
     private boolean dataAvailable;
     private Point lastPoint;
@@ -98,6 +98,7 @@ public class InterfazTemperatura implements Drawable, Runnable
         {
             g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
             g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
+
         }
 
     }
@@ -178,15 +179,13 @@ public class InterfazTemperatura implements Drawable, Runnable
     public void run()
     {
 
-        for (int i = 0; !false; i++)
+        for (; !false;)
             try
             {
 
-                Thread.sleep(500);
+                Thread.sleep(DELAY);
                 setData(new Random().nextInt(30) + 15);
                 setDataAvailable(true);
-
-                setDataAvailable(dataAvailable);
 
             } catch (InterruptedException ex)
             {
