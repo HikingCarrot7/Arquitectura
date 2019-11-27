@@ -1,10 +1,12 @@
 package com.sw.main;
 
+import com.sw.controller.DataController;
 import com.sw.graphics.Camera;
-import com.sw.input.KeyInput;
-import com.sw.menus.Calificacion;
+import com.sw.io.Conexion;
+import com.sw.menus.InsertarCalificacion;
 import com.sw.menus.GraficaTemperatura;
 import com.sw.menus.MainMenu;
+import com.sw.menus.NuestraCalificacion;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -19,12 +21,14 @@ public class Panel extends Canvas
 
     public static int ANCHO = 800;
     public static int ALTO = 600;
-    public static int DELAY = 500;
 
     private Camera camera;
+    private Conexion conexion;
+    private DataController dataController;
     private MainMenu mainMenu;
     private GraficaTemperatura temperatura;
-    private Calificacion calificacion;
+    private InsertarCalificacion calificacion;
+    private NuestraCalificacion nuestraCalificacion;
 
     public static enum STATUS
     {
@@ -32,6 +36,7 @@ public class Panel extends Canvas
         Menu,
         Temperatura,
         Calificacion,
+        NuestraCalificacion,
 
     }
 
@@ -45,10 +50,15 @@ public class Panel extends Canvas
         camera = new Camera(0, 0);
         mainMenu = new MainMenu();
         temperatura = new GraficaTemperatura(camera);
-        calificacion = new Calificacion();
+        calificacion = new InsertarCalificacion();
+        nuestraCalificacion = new NuestraCalificacion();
+        dataController = new DataController(mainMenu, temperatura, calificacion);
+        conexion = new Conexion(temperatura, dataController);
+
+        conexion.iniciarConexion();
 
         requestFocus();
-        addKeyListener(new KeyInput(mainMenu, temperatura, calificacion));
+        addKeyListener(dataController);
 
     }
 
@@ -80,6 +90,12 @@ public class Panel extends Canvas
 
                 break;
 
+            case NuestraCalificacion:
+
+                nuestraCalificacion.tick();
+
+                break;
+
             default:
                 break;
 
@@ -94,7 +110,7 @@ public class Panel extends Canvas
 
         Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 
-        g.setColor(Color.black);
+        g.setColor(new Color(206, 249, 254));
         g.fillRect(0, 0, ANCHO, ALTO);
 
         g.translate(-camera.getX(), 0);
@@ -117,6 +133,12 @@ public class Panel extends Canvas
             case Calificacion:
 
                 calificacion.render(g);
+
+                break;
+
+            case NuestraCalificacion:
+
+                nuestraCalificacion.render(g);
 
                 break;
 

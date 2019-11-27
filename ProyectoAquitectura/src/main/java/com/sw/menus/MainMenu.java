@@ -62,51 +62,27 @@ public class MainMenu implements Drawable
     public void render(Graphics2D g)
     {
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.setFont(new Font("serif", Font.BOLD, 70));
-        g.drawString("Bienvenido!", Panel.ANCHO / 2 - 180, 100);
+        g.drawString("¡Bienvenido!", Panel.ANCHO / 2 - 190, 100);
 
-        renderTempBox(g);
+        renderBox(g, temperatura, isTempSelected());
 
-        renderCalifBox(g);
+        renderBox(g, calif, isCalifSelected());
 
-        renderSalirBox(g);
-
-    }
-
-    private void renderTempBox(Graphics2D g)
-    {
-
-        g.setColor(Color.white);
-        g.setFont(new Font("serif", Font.BOLD, 40));
-        g.drawRect(temperatura.x, temperatura.y, temperatura.width, temperatura.height);
-        g.setStroke(new BasicStroke(3));
-        g.setColor(isTempSelected() ? Color.red : Color.white);
-        g.drawRect(temperatura.x, temperatura.y, temperatura.width, temperatura.height);
+        renderBox(g, salir, isSalirSelected());
 
     }
 
-    private void renderCalifBox(Graphics2D g)
+    private void renderBox(Graphics2D g, Rectangle rect, boolean isSelected)
     {
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.setFont(new Font("serif", Font.BOLD, 40));
-        g.drawRect(calif.x, calif.y, calif.width, calif.height);
+        g.drawRect(rect.x, rect.y, rect.width, rect.height);
         g.setStroke(new BasicStroke(3));
-        g.setColor(isCalifSelected() ? Color.red : Color.white);
-        g.drawRect(calif.x, calif.y, calif.width, calif.height);
-
-    }
-
-    private void renderSalirBox(Graphics2D g)
-    {
-
-        g.setColor(Color.white);
-        g.setFont(new Font("serif", Font.BOLD, 40));
-        g.drawRect(salir.x, salir.y, salir.width, salir.height);
-        g.setStroke(new BasicStroke(3));
-        g.setColor(isSalirSelected() ? Color.red : Color.white);
-        g.drawRect(salir.x, salir.y, salir.width, salir.height);
+        g.setColor(isSelected ? new Color(0, 228, 255) : Color.black);
+        g.drawRect(rect.x, rect.y, rect.width, rect.height);
 
     }
 

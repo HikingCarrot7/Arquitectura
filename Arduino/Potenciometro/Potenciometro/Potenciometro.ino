@@ -5,8 +5,12 @@ void setup() {
 
 void loop() {
 
-  Serial.println((int) (analogRead(3) * (255.0 / 1023.0)));
+  //Serial.println(() + "," + (random(40) + 10));
 
-  delay(20);
+  char buffer[15] = "";
+  sprintf(buffer, "%d,%d,%d,%d", (int) (analogRead(A0) * (255.0 / 1023.0)), (random(40) + 10), 0, 0);
+  Serial.println(buffer);
+
+  delay(300);
 
 }

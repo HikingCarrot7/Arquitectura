@@ -1,6 +1,6 @@
 package com.sw.graphics;
 
-import com.sw.main.Panel;
+import com.sw.io.Conexion;
 
 /**
  *
@@ -11,7 +11,7 @@ public class Camera
 
     private int x;
     private int y;
-    private volatile boolean stopCamera;
+    private volatile boolean cameraStopped;
 
     public Camera(int x, int y)
     {
@@ -25,11 +25,11 @@ public class Camera
         new Thread(() ->
         {
 
-            for (int i = 0; i < 40 && !stopCamera; i++)
+            for (int i = 0; i < 40 && !cameraStopped; i++)
                 try
                 {
 
-                    Thread.sleep(Panel.DELAY / 40);
+                    Thread.sleep(Conexion.DELAY_CONEXION / 40);
 
                     setX(getX() + 1);
 
@@ -62,14 +62,14 @@ public class Camera
         this.y = y;
     }
 
-    public boolean isStopCamera()
+    public boolean isCameraStopped()
     {
-        return stopCamera;
+        return cameraStopped;
     }
 
-    public void setStopCamera(boolean stopCamera)
+    public void setCameraStopped(boolean stopCamera)
     {
-        this.stopCamera = stopCamera;
+        this.cameraStopped = stopCamera;
     }
 
 }

@@ -6,17 +6,17 @@ import com.sw.graphics.Drawable;
 import com.sw.main.Panel;
 import com.sw.utilities.Linea;
 import com.sw.utilities.Point;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
  * @author Mohammed
  */
-public class GraficaTemperatura implements Drawable, Runnable
+public class GraficaTemperatura implements Drawable
 {
 
     private ArrayList<Linea> lineas;
@@ -34,8 +34,6 @@ public class GraficaTemperatura implements Drawable, Runnable
         lineas = new ArrayList<>();
         animaciones = new ArrayList<>();
 
-        new Thread(this).start();
-
     }
 
     @Override
@@ -51,7 +49,7 @@ public class GraficaTemperatura implements Drawable, Runnable
     public void render(Graphics2D g)
     {
 
-        camera.setStopCamera(false);
+        camera.setCameraStopped(false);
 
         dibujarRegla(g);
 
@@ -71,7 +69,7 @@ public class GraficaTemperatura implements Drawable, Runnable
         int y = Panel.ALTO;
         int aux = 0;
 
-        g.setColor(Color.white);
+        g.setColor(Color.black);
         g.setFont(new Font("serif", Font.BOLD, 20));
         g.drawLine(camera.getX(), Panel.ALTO - 1, camera.getX() + 30, Panel.ALTO - 1);
 
@@ -93,11 +91,14 @@ public class GraficaTemperatura implements Drawable, Runnable
     private void dibujarLineas(Graphics2D g)
     {
 
-        g.setColor(Color.white);
+        g.setStroke(new BasicStroke(3));
 
         for (int i = 0; i < lineas.size(); i++)
         {
+
+            g.setColor(new Color(0, 228, 255));
             g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
+            g.setColor(Color.black);
             g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
 
         }
@@ -138,7 +139,7 @@ public class GraficaTemperatura implements Drawable, Runnable
 
         lineas.clear();
         animaciones.clear();
-        camera.setStopCamera(true);
+        camera.setCameraStopped(true);
         camera.setX(0);
 
         lastPoint = new Point(60, Panel.ALTO);
@@ -163,25 +164,6 @@ public class GraficaTemperatura implements Drawable, Runnable
     public boolean isDataAvailable()
     {
         return dataAvailable;
-    }
-
-    @Override
-    public void run()
-    {
-
-        for (; !false;)
-            try
-            {
-
-                Thread.sleep(Panel.DELAY);
-                setData(new Random().nextInt(30) + 15);
-                setDataAvailable(true);
-
-            } catch (InterruptedException ex)
-            {
-                System.out.println(ex.getMessage());
-            }
-
     }
 
 }

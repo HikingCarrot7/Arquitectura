@@ -5,12 +5,14 @@ import java.awt.Graphics2D;
 
 /**
  *
- * @author HikingC7
+ * @author Mohammed
  */
-public class Calificacion implements Drawable
+public class NuestraCalificacion implements Drawable
 {
 
-    private String calif;
+    public NuestraCalificacion()
+    {
+    }
 
     @Override
     public void tick()
@@ -22,11 +24,6 @@ public class Calificacion implements Drawable
     public void render(Graphics2D g)
     {
 
-    }
-
-    public void escribirCalificacion(char caracter)
-    {
-        System.out.println(caracter);
     }
 
 }
