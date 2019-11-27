@@ -66,18 +66,20 @@ public class MainMenu implements Drawable
         g.setFont(new Font("serif", Font.BOLD, 70));
         g.drawString("¡Bienvenido!", Panel.ANCHO / 2 - 190, 100);
 
-        renderBox(g, temperatura, isTempSelected());
+        renderBox(g, temperatura, isTempSelected(), "Gráfica de temperatura", 30);
 
-        renderBox(g, calif, isCalifSelected());
+        renderBox(g, calif, isCalifSelected(), "Asignar calificación", 35);
 
-        renderBox(g, salir, isSalirSelected());
+        renderBox(g, salir, isSalirSelected(), "Ver nuestra calificación", 20);
 
     }
 
-    private void renderBox(Graphics2D g, Rectangle rect, boolean isSelected)
+    private void renderBox(Graphics2D g, Rectangle rect, boolean isSelected, String text, int offSet)
     {
 
         g.setColor(Color.black);
+        g.setFont(new Font("serif", Font.BOLD, 20));
+        g.drawString(text, rect.x + offSet, rect.y + 40);
         g.setFont(new Font("serif", Font.BOLD, 40));
         g.drawRect(rect.x, rect.y, rect.width, rect.height);
         g.setStroke(new BasicStroke(3));

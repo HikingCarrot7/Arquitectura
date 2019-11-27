@@ -39,7 +39,7 @@ public class Conexion implements SerialPortEventListener
             try
             {
 
-                ino.arduinoRX("COM5", 115200, this);
+                ino.arduinoRX("COM4", 9600, this);
 
             } catch (ArduinoException | SerialPortException ex)
             {

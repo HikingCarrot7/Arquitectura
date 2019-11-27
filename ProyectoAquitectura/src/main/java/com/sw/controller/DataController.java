@@ -1,9 +1,10 @@
 package com.sw.controller;
 
 import com.sw.main.Panel;
-import com.sw.menus.InsertarCalificacion;
 import com.sw.menus.GraficaTemperatura;
+import com.sw.menus.InsertarCalificacion;
 import com.sw.menus.MainMenu;
+import com.sw.menus.NuestraCalificacion;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -17,6 +18,7 @@ public class DataController extends KeyAdapter
     private MainMenu mainMenu;
     private GraficaTemperatura graficaTemperatura;
     private InsertarCalificacion calificacion;
+    private NuestraCalificacion nuestraCalificacion;
 
     private final int OFFSETREAD = 40;
     private int lastData = 0;
@@ -24,25 +26,40 @@ public class DataController extends KeyAdapter
 
     private boolean indexSet;
 
-    public DataController(MainMenu mainMenu, GraficaTemperatura graficaTemperatura, InsertarCalificacion calificacion)
+    public DataController(MainMenu mainMenu, GraficaTemperatura graficaTemperatura, InsertarCalificacion calificacion, NuestraCalificacion nuestraCalificacion)
     {
         this.mainMenu = mainMenu;
         this.graficaTemperatura = graficaTemperatura;
         this.calificacion = calificacion;
+        this.nuestraCalificacion = nuestraCalificacion;
 
     }
 
     public void setDataControlMenu(int data)
     {
 
+        System.out.println(data);
+
         if (!isIndexSet())
         {
-            index = (int) Math.ceil(data / 85) - 1;
+            index = Math.abs((int) Math.ceil(data / 85) - 3);
+
+            if (index == 3)
+                index = 2;
+
+            lastData = data;
             setIndexSet(true);
+            System.out.println("1 vez");
 
         }
 
-        if (data > lastData + OFFSETREAD)
+        if (data >= 215)
+            index = 0;
+
+        if (data <= 40)
+            index = 2;
+
+        if (data <= lastData - OFFSETREAD)
             if (index < 2)
             {
                 index++;
@@ -50,7 +67,7 @@ public class DataController extends KeyAdapter
 
             }
 
-        if (data < lastData - OFFSETREAD)
+        if (data >= lastData + OFFSETREAD)
             if (index > 0)
             {
                 index--;
@@ -89,6 +106,9 @@ public class DataController extends KeyAdapter
             gestionarEsc(1);
 
         gestionarMenu();
+
+        if (Panel.status.equals(Panel.STATUS.Calificacion))
+            calificacion.escribirCalificacion(e);
 
     }
 
@@ -143,6 +163,26 @@ public class DataController extends KeyAdapter
     public void gestionarEnter(int data)
     {
 
+        if (!Panel.status.equals(Panel.STATUS.Menu))
+        {
+
+            switch (Panel.status)
+            {
+
+                case Calificacion:
+
+                    calificacion.setCalificacionAsignada(true);
+
+                    break;
+
+                default:
+
+            }
+
+            return;
+
+        }
+
         if (data != 0)
             switch (index)
             {
@@ -157,11 +197,15 @@ public class DataController extends KeyAdapter
 
                     Panel.status = Panel.STATUS.Calificacion;
 
+                    calificacion.reiniciarCalif();
+
                     break;
 
                 case 2:
 
                     Panel.status = Panel.STATUS.NuestraCalificacion;
+
+                    nuestraCalificacion.reiniciarCortina();
 
                 default:
                     break;

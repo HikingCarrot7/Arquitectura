@@ -93,14 +93,21 @@ public class GraficaTemperatura implements Drawable
 
         g.setStroke(new BasicStroke(3));
 
-        for (int i = 0; i < lineas.size(); i++)
+        try
         {
 
-            g.setColor(new Color(0, 228, 255));
-            g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
-            g.setColor(Color.black);
-            g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
+            for (int i = 0; i < lineas.size(); i++)
+            {
 
+                g.setColor(new Color(0, 228, 255));
+                g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
+                g.setColor(Color.black);
+                g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
+
+            }
+
+        } catch (NullPointerException | IndexOutOfBoundsException ex)
+        {
         }
 
     }

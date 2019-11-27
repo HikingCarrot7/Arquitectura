@@ -3,8 +3,8 @@ package com.sw.main;
 import com.sw.controller.DataController;
 import com.sw.graphics.Camera;
 import com.sw.io.Conexion;
-import com.sw.menus.InsertarCalificacion;
 import com.sw.menus.GraficaTemperatura;
+import com.sw.menus.InsertarCalificacion;
 import com.sw.menus.MainMenu;
 import com.sw.menus.NuestraCalificacion;
 import java.awt.Canvas;
@@ -52,7 +52,7 @@ public class Panel extends Canvas
         temperatura = new GraficaTemperatura(camera);
         calificacion = new InsertarCalificacion();
         nuestraCalificacion = new NuestraCalificacion();
-        dataController = new DataController(mainMenu, temperatura, calificacion);
+        dataController = new DataController(mainMenu, temperatura, calificacion, nuestraCalificacion);
         conexion = new Conexion(temperatura, dataController);
 
         conexion.iniciarConexion();
