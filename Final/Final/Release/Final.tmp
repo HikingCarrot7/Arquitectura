@@ -22,28 +22,28 @@
   <FILE>Final.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <START><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>24</LINE></START>
-  <UART_CONFIG><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>230</LINE></UART_CONFIG>
-  <CICLO><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>46</LINE></CICLO>
-  <adcInit2><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>266</LINE></adcInit2>
-  <adcRead><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>276</LINE></adcRead>
-  <adcWait><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>283</LINE></adcWait>
-  <ASCII><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>206</LINE></ASCII>
-  <UART_TRANSMIT><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>244</LINE></UART_TRANSMIT>
-  <adcInit><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>256</LINE></adcInit>
-  <DIVIDIR><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>297</LINE></DIVIDIR>
-  <BOTON1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>308</LINE></BOTON1>
-  <BOTON2><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>316</LINE></BOTON2>
-  <delay_100ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>353</LINE></delay_100ms>
-  <L_CENTENA><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>207</LINE></L_CENTENA>
-  <L_DECENA><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>213</LINE></L_DECENA>
-  <L_UNIDAD><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>219</LINE></L_UNIDAD>
-  <L_FIN><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>225</LINE></L_FIN>
-  <UART_FREE><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>250</LINE></UART_FREE>
-  <DECIMAL_1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>303</LINE></DECIMAL_1>
-  <delay_10ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>326</LINE></delay_10ms>
-  <repetir1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>328</LINE></repetir1>
-  <repetir><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>330</LINE></repetir>
-  <delay_500ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>343</LINE></delay_500ms>
+  <START><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>14</LINE></START>
+  <UART_CONFIG><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>254</LINE></UART_CONFIG>
+  <CICLO><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>37</LINE></CICLO>
+  <adcInit2><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>290</LINE></adcInit2>
+  <adcRead><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>300</LINE></adcRead>
+  <adcWait><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>307</LINE></adcWait>
+  <DIVIDIR><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>321</LINE></DIVIDIR>
+  <ASCII><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>230</LINE></ASCII>
+  <UART_TRANSMIT><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>268</LINE></UART_TRANSMIT>
+  <adcInit><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>280</LINE></adcInit>
+  <BOTON1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>332</LINE></BOTON1>
+  <BOTON2><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>340</LINE></BOTON2>
+  <delay_100ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>377</LINE></delay_100ms>
+  <L_CENTENA><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>231</LINE></L_CENTENA>
+  <L_DECENA><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>237</LINE></L_DECENA>
+  <L_UNIDAD><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>243</LINE></L_UNIDAD>
+  <L_FIN><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>249</LINE></L_FIN>
+  <UART_FREE><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>274</LINE></UART_FREE>
+  <DECIMAL_1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>327</LINE></DECIMAL_1>
+  <delay_10ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>350</LINE></delay_10ms>
+  <repetir1><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>352</LINE></repetir1>
+  <repetir><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>354</LINE></repetir>
+  <delay_500ms><FILE>C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>367</LINE></delay_500ms>
  </LABELS>
 </ASSEMBLER_INFO>

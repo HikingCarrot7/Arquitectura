@@ -63,8 +63,8 @@ public class MainMenu implements Drawable
     {
 
         g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 70));
-        g.drawString("¡Bienvenido!", Panel.ANCHO / 2 - 190, 100);
+        g.setFont(new Font("Peach Milk", 0, 120));
+        g.drawString("¡Bienvenido!", Panel.ANCHO / 2 - 230, 150);
 
         renderBox(g, temperatura, isTempSelected(), "Gráfica de temperatura", 30);
 
@@ -78,9 +78,8 @@ public class MainMenu implements Drawable
     {
 
         g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 20));
+        g.setFont(new Font("Peach Milk", Font.PLAIN, 25));
         g.drawString(text, rect.x + offSet, rect.y + 40);
-        g.setFont(new Font("serif", Font.BOLD, 40));
         g.drawRect(rect.x, rect.y, rect.width, rect.height);
         g.setStroke(new BasicStroke(3));
         g.setColor(isSelected ? new Color(0, 228, 255) : Color.black);

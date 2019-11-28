@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm Tue Nov 26 21:04:11 2019
+AVRASM ver. 2.2.7  C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm Wed Nov 27 19:01:25 2019
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
-C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
-C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
+C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(1): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\avrasm\inc\m328pdef.inc'
                                  
-                                 ;
+                                 .include<m328pdef.inc>
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -987,13 +987,6 @@ C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): In
                                  
                                  ; ***** END OF FILE ******************************************************
                                  
-                                 ; Created: 30/09/2019 02:31:44 p. m.
-                                 ; Author : Emmanuel
-                                 ;
-                                 
-                                 
-                                 ; Replace with your application code
-                                 .include<m328pdef.inc>
                                  
                                  ;***** Created: 2011-02-09 12:03 ******* Source: ATmega328P.xml **********
                                  ;*************************************************************************
@@ -1046,9 +1039,6 @@ C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): In
                                  .def btn1 = r24
                                  .def btn2 = r25
                                  
-                                 
-                                 
-                                 
                                  .org    0x000
 000000 c000                      rjmp    START
                                  
@@ -1060,26 +1050,27 @@ C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): In
 000005 e060                          ldi        centena, 0
                                  	
                                  
-                                                                 ;DDRx: 1 = Salida, 0 = entrada
-000006 e200                          ldi        r16,0b00100000        ;configura PB0 como entrada y PB5 (LED) como salida
+                                 										;DDRx: 1 = Salida, 0 = entrada
+000006 e200                          ldi        r16,0b00100000			;configura PB0 como entrada y PB5 (LED) como salida
 000007 b904                          out        DDRB,r16
                                  
-000008 e000                          ldi        r16,0b00000000        ;configura puertoC como entrada (ADC)
+000008 e000                          ldi        r16,0b00000000			;configura puertoC como entrada (ADC)
 000009 b907                          out        DDRC,r16
                                  
-00000a 0000                          nop                            ;retardo
-                                                                 ;PORTx: 1 = HIGH, 0 = LOW (siempre y cuando el pin se configuro como salida)    
-00000b 940e 00ae                     call    UART_CONFIG
+00000a 0000                          nop									;retardo
+                                 										;PORTx: 1 = HIGH, 0 = LOW (siempre y cuando el pin se configuro como salida)    
+00000b 940e 00cd                     call    UART_CONFIG
                                  
                                      ;call    ADC_CONFIG
+                                 	
                                     
                                  
                                  CICLO:
-                                 ;--------Envia datos del potenciometro-----
+                                 ;--------Envia datos del Sensor 8 bits low ADC1-----
                                  
-00000d 940e 00ca                 	call adcInit2
-00000f 940e 00d1                     call adcRead
-000011 940e 00d8                     call adcWait
+00000d 940e 00e9                 	call adcInit2
+00000f 940e 00f0                     call adcRead
+000011 940e 00f7                     call adcWait
 000013 9120 0078                 	lds r18, ADCL
 000015 9130 0079                     lds r19, ADCH
                                  
@@ -1090,308 +1081,341 @@ C:\Users\HikingCarrot7\Documents\GitHub\Arquitectura\Final\Final\main.asm(8): In
 00001a e370                      	ldi decimal, 48
                                  
 00001b 2f02                          mov r16, r18        ; r16 = r18
-                                 
-00001c 940e 009e                 	call    ASCII
+00001c 940e 0103                 	call DIVIDIR
+00001e 940e 00bd                 	call    ASCII
                                      
-00001e e310                          ldi        r17, 48
-00001f 0f41                          add        unidad, r17
-000020 0f51                          add        decena, r17
-000021 0f61                          add        centena, r17    
+000020 e310                          ldi r17, 48
+000021 0f41                          add unidad, r17
+000022 0f51                          add decena, r17
+000023 0f61                          add centena, r17    
                                  
-000022 2f06                          mov        r16, centena            
-000023 940e 00bb                     call    UART_TRANSMIT
+000024 2f06                          mov     r16, centena            
+000025 940e 00da                     call    UART_TRANSMIT
                                  
-000025 2f05                          mov        r16, decena            
-000026 940e 00bb                     call    UART_TRANSMIT
+000027 2f05                          mov     r16, decena            
+000028 940e 00da                     call    UART_TRANSMIT
                                  
-000028 2f04                          mov        r16, unidad            
-000029 940e 00bb                     call    UART_TRANSMIT
+00002a 2f04                          mov     r16, unidad            
+00002b 940e 00da                     call    UART_TRANSMIT
                                  
-00002b e70c                      	ldi r16, 124
-00002c 940e 00bb                 	call UART_TRANSMIT
+00002d e20e                      	ldi r16, 46
+00002e 940e 00da                 	call UART_TRANSMIT
                                  
-                                 	;---------Envia los valores de temperatura 8bits--------------
+000030 2f07                      	mov r16, decimal
+000031 940e 00da                 	call UART_TRANSMIT
                                  
-00002e 940e 00c3                 	call adcInit
-000030 940e 00d1                     call adcRead
-000032 940e 00d8                     call adcWait
-000034 9120 0078                 	lds r18, ADCL
-000036 9130 0079                     lds r19, ADCH
+000033 e20c                      	ldi r16, 44
+000034 940e 00da                 	call UART_TRANSMIT
+                                 
+                                 	;---------Envia los valores del sensor 2 bits high--------------
                                  
                                  
-000038 e040                          ldi unidad, 0
-000039 e050                          ldi decena, 0
-00003a e060                          ldi centena, 0
-00003b e370                      	ldi decimal, 48
+000036 e040                          ldi unidad, 0
+000037 e050                          ldi decena, 0
+000038 e060                          ldi centena, 0
+000039 e370                      	ldi decimal, 48
                                  
-00003c 2f02                          mov r16, r18        
-00003d 940e 00e4                 	call DIVIDIR
-00003f 940e 009e                     call    ASCII
+00003a 2f03                          mov r16, r19
+00003b 940e 0103                 	call DIVIDIR        
+00003d 940e 00bd                     call    ASCII
                                      
-000041 e310                          ldi        r17, 48
-000042 0f41                          add        unidad, r17
-000043 0f51                          add        decena, r17
-000044 0f61                          add        centena, r17    
+00003f e310                          ldi        r17, 48
+000040 0f41                          add        unidad, r17
+000041 0f51                          add        decena, r17
+000042 0f61                          add        centena, r17    
                                  
-000045 2f06                          mov        r16, centena            
-000046 940e 00bb                     call    UART_TRANSMIT
+000043 2f06                          mov        r16, centena            
+000044 940e 00da                     call    UART_TRANSMIT
                                  
-000048 2f05                          mov        r16, decena            
-000049 940e 00bb                     call    UART_TRANSMIT
+000046 2f05                          mov        r16, decena            
+000047 940e 00da                     call    UART_TRANSMIT
                                  
-00004b 2f04                          mov        r16, unidad            
-00004c 940e 00bb                     call    UART_TRANSMIT
+000049 2f04                          mov        r16, unidad            
+00004a 940e 00da                     call    UART_TRANSMIT
                                  
-00004e e20e                      	ldi r16, 46
-00004f 940e 00bb                 	call UART_TRANSMIT
+00004c e20e                      	ldi r16, 46
+00004d 940e 00da                 	call UART_TRANSMIT
                                  
-000051 2f07                      	mov r16, decimal
-000052 940e 00bb                 	call UART_TRANSMIT
+00004f 2f07                      	mov r16, decimal
+000050 940e 00da                 	call UART_TRANSMIT
                                  
-000054 e70c                      	ldi r16, 124
-000055 940e 00bb                 	call UART_TRANSMIT
+000052 e20c                      	ldi r16, 44
+000053 940e 00da                 	call UART_TRANSMIT
                                  	
-                                 	;--------Envia los 2 bits faltantes---------
+                                 	;--------Envia los datos del potenciometro ADC0---------
+000055 940e 00e2                 	call adcInit
+000057 940e 00f0                 	call adcRead
+000059 940e 00f7                     call adcWait
+00005b 9120 0078                 	lds r18, ADCL
+00005d 9130 0079                     lds r19, ADCH
                                  
-000057 e040                      	ldi unidad, 0
-000058 e050                          ldi decena, 0
-000059 e060                          ldi centena, 0
-00005a e370                      	ldi decimal, 48
+00005f e040                      	ldi unidad, 0
+000060 e050                          ldi decena, 0
+000061 e060                          ldi centena, 0
+000062 e370                      	ldi decimal, 48
                                  
-00005b 2f03                          mov r16, r19        
-00005c 940e 00e4                 	call DIVIDIR
-00005e 940e 009e                     call    ASCII
+000063 2f02                          mov r16, r18 ;ADCl        
+                                 	;call DIVIDIR
+000064 940e 00bd                     call ASCII
                                      
-000060 e310                          ldi        r17, 48
-000061 0f41                          add        unidad, r17
-000062 0f51                          add        decena, r17
-000063 0f61                          add        centena, r17    
+000066 e310                          ldi        r17, 48
+000067 0f41                          add        unidad, r17
+000068 0f51                          add        decena, r17
+000069 0f61                          add        centena, r17    
                                  
-000064 2f06                          mov        r16, centena            
-000065 940e 00bb                     call    UART_TRANSMIT
+00006a 2f06                          mov        r16, centena            
+00006b 940e 00da                     call    UART_TRANSMIT
                                  
-000067 2f05                          mov        r16, decena            
-000068 940e 00bb                     call    UART_TRANSMIT
+00006d 2f05                          mov        r16, decena            
+00006e 940e 00da                     call    UART_TRANSMIT
                                  
-00006a 2f04                          mov        r16, unidad            
-00006b 940e 00bb                     call    UART_TRANSMIT
+000070 2f04                          mov        r16, unidad            
+000071 940e 00da                     call    UART_TRANSMIT
                                  
-00006d e20e                      	ldi r16, 46
-00006e 940e 00bb                 	call UART_TRANSMIT
+000073 e20c                      	ldi r16, 44
+000074 940e 00da                 	call UART_TRANSMIT
                                  
-000070 2f07                      	mov r16, decimal
-000071 940e 00bb                 	call UART_TRANSMIT
+                                 	;-----Envio los 2 bits faltantes de temperatura
+                                 	;lds r19, ADCH
                                  
-000073 e70c                      	ldi r16, 124
-000074 940e 00bb                 	call UART_TRANSMIT
+000076 e040                      	ldi unidad, 0
+000077 e050                          ldi decena, 0
+000078 e060                          ldi centena, 0
+000079 e370                      	ldi decimal, 48
+                                 
+00007a 2f03                          mov r16, r19 ;ADCH        
+                                 	;call DIVIDIR
+00007b 940e 00bd                     call ASCII
+                                     
+00007d e310                          ldi        r17, 48
+00007e 0f41                          add        unidad, r17
+00007f 0f51                          add        decena, r17
+000080 0f61                          add        centena, r17    
+                                 
+000081 2f06                          mov        r16, centena            
+000082 940e 00da                     call    UART_TRANSMIT
+                                 
+000084 2f05                          mov        r16, decena            
+000085 940e 00da                     call    UART_TRANSMIT
+                                 
+000087 2f04                          mov        r16, unidad            
+000088 940e 00da                     call    UART_TRANSMIT
+                                 
+00008a e20c                      	ldi r16, 44
+00008b 940e 00da                 	call UART_TRANSMIT
+                                 
                                  
                                  
                                  	;---------Envió de datos del boton aceptar-----------
-000076 940e 00ea                 	call BOTON1
-000078 e040                      	ldi unidad, 0
-000079 e050                          ldi decena, 0
-00007a e060                          ldi centena, 0
-00007b e370                      	ldi decimal, 48
+00008d 940e 0109                 	call BOTON1
+00008f e040                      	ldi unidad, 0
+000090 e050                          ldi decena, 0
+000091 e060                          ldi centena, 0
+000092 e370                      	ldi decimal, 48
                                  
-00007c 2f08                          mov r16, btn1       
-00007d 940e 009e                     call    ASCII
+000093 2f08                          mov r16, btn1       
+000094 940e 00bd                     call    ASCII
                                      
-00007f e310                          ldi        r17, 48
-000080 0f41                          add        unidad, r17  
+000096 e310                          ldi        r17, 48
+000097 0f41                          add        unidad, r17  
                                  
-000081 2f04                          mov        r16, unidad            
-000082 940e 00bb                     call    UART_TRANSMIT
+000098 2f04                          mov        r16, unidad            
+000099 940e 00da                     call    UART_TRANSMIT
                                  
-000084 e70c                      	ldi r16, 124
-000085 940e 00bb                 	call UART_TRANSMIT
+00009b e20c                      	ldi r16, 44
+00009c 940e 00da                 	call UART_TRANSMIT
                                  
                                  	;--------eNVIO DE DATOS DEL BOTON 2-------
-000087 940e 00f0                 	call BOTON2
-000089 e040                      	ldi unidad, 0
-00008a e050                          ldi decena, 0
-00008b e060                          ldi centena, 0
-00008c e370                      	ldi decimal, 48
+00009e 940e 010f                 	call BOTON2
+0000a0 e040                      	ldi unidad, 0
+0000a1 e050                          ldi decena, 0
+0000a2 e060                          ldi centena, 0
+0000a3 e370                      	ldi decimal, 48
                                  
-00008d 2f09                          mov r16, btn2       
-00008e 940e 009e                     call    ASCII
+0000a4 2f09                          mov r16, btn2       
+0000a5 940e 00bd                     call    ASCII
                                      
-000090 e310                          ldi        r17, 48
-000091 0f41                          add        unidad, r17  
+0000a7 e310                          ldi        r17, 48
+0000a8 0f41                          add        unidad, r17  
                                  
-000092 2f04                          mov        r16, unidad            
-000093 940e 00bb                     call    UART_TRANSMIT
+0000a9 2f04                          mov        r16, unidad            
+0000aa 940e 00da                     call    UART_TRANSMIT
                                  
-000095 e70c                      	ldi r16, 124
-000096 940e 00bb                 	call UART_TRANSMIT
+0000ac e20c                      	ldi r16, 44
+0000ad 940e 00da                 	call UART_TRANSMIT
                                  
                                  	;FIN ENvio de datos
-000098 e00a                          ldi        r16, 10            ;Salto de linea
-000099 940e 00bb                     call    UART_TRANSMIT
-00009b 940e 010d                 	call delay_100ms 
-                                     ;--retardo de 1 segundo----------                               
-                                     
+0000af e00a                          ldi        r16, 10            ;Salto de linea
+0000b0 940e 00da                     call    UART_TRANSMIT
                                  
-00009d cf6f                          rjmp CICLO
+                                     ;--retardo de 1 segundo----------  
+0000b2 940e 00e9                 	call adcInit2                             
+0000b4 940e 012c                 	call delay_100ms 
+0000b6 940e 012c                 	call delay_100ms 
+0000b8 940e 012c                 	call delay_100ms 
+0000ba 940e 012c                 	call delay_100ms 
+                                 
+0000bc cf50                          rjmp CICLO
                                  ;--------convertir a ASCII------------------
                                  ;-----r16 guarda el valor en decimal--------    
                                  ASCII:
                                  L_CENTENA:
-00009e 3604                          cpi        r16, 100        ;Rd, Rr
-00009f f018                          BRLO    L_DECENA        ; brinca si r16 < 100
-0000a0 9563                          inc        centena
-0000a1 5604                          subi    r16, 100
-0000a2 cffb                          rjmp    L_CENTENA
+0000bd 3604                          cpi        r16, 100        ;Rd, Rr
+0000be f018                          BRLO    L_DECENA        ; brinca si r16 < 100
+0000bf 9563                          inc        centena
+0000c0 5604                          subi    r16, 100
+0000c1 cffb                          rjmp    L_CENTENA
                                  L_DECENA:
-0000a3 300a                          cpi        r16, 10            ;Rd, Rr
-0000a4 f018                          BRLO    L_UNIDAD        ; brinca si r16 < 100
-0000a5 9553                          inc        decena
-0000a6 500a                          subi    r16, 10
-0000a7 cffb                          rjmp    L_DECENA
+0000c2 300a                          cpi        r16, 10            ;Rd, Rr
+0000c3 f018                          BRLO    L_UNIDAD        ; brinca si r16 < 100
+0000c4 9553                          inc        decena
+0000c5 500a                          subi    r16, 10
+0000c6 cffb                          rjmp    L_DECENA
                                  L_UNIDAD:
-0000a8 3001                          cpi        r16, 1            ;Rd, Rr
-0000a9 f018                          BRLO    L_FIN        ; brinca si r16 < 100
-0000aa 9543                          inc        unidad
-0000ab 5001                          subi    r16, 1
-0000ac cffb                          rjmp    L_UNIDAD
+0000c7 3001                          cpi        r16, 1            ;Rd, Rr
+0000c8 f018                          BRLO    L_FIN        ; brinca si r16 < 100
+0000c9 9543                          inc        unidad
+0000ca 5001                          subi    r16, 1
+0000cb cffb                          rjmp    L_UNIDAD
                                  L_FIN:
-0000ad 9508                          ret
+0000cc 9508                          ret
                                  
                                  
                                  ;-----rutina para configurar USART---------
                                  UART_CONFIG:
-0000ae e006                          ldi        r16, 0b00000110        ;modo asincrono, paridad deshabilitada,8 bits de datos
-0000af 9300 00c2                     sts        UCSR0C,r16
+0000cd e006                          ldi        r16, 0b00000110        ;modo asincrono, paridad deshabilitada,8 bits de datos
+0000ce 9300 00c2                     sts        UCSR0C,r16
                                      
                                      ;------configura baud rate----------------------
-0000b1 e010                          ldi        r17, 0b00000000
-0000b2 e008                          ldi        r16, 0b00001000        ;115200 baudios
+0000d0 e010                          ldi        r17, 0b00000000
+0000d1 e008                          ldi        r16, 0b00001000        ;115200 baudios
                                  
-0000b3 9310 00c5                     sts        UBRR0H, r17
-0000b5 9300 00c4                     sts        UBRR0L, r16
+0000d2 9310 00c5                     sts        UBRR0H, r17
+0000d4 9300 00c4                     sts        UBRR0L, r16
                                  
-0000b7 e108                          ldi        r16, 0b00011000        ;RxEn = 1 TxEn = 1  habilita pines Rx y Tx
-0000b8 9300 00c1                     sts        UCSR0B, r16
-0000ba 9508                          ret
+0000d6 e108                          ldi        r16, 0b00011000        ;RxEn = 1 TxEn = 1  habilita pines Rx y Tx
+0000d7 9300 00c1                     sts        UCSR0B, r16
+0000d9 9508                          ret
                                  UART_TRANSMIT:    
-0000bb 9110 00c0                     LDS        r17, UCSR0A            
+0000da 9110 00c0                     LDS        r17, UCSR0A            
                                  
-0000bd fb15                          bst        r17, 5            ;carga el valor a la bandera T
-0000be f00e                          BRTS    UART_FREE        ;brinca si T=1
-0000bf cffb                          rjmp    UART_TRANSMIT
+0000dc fb15                          bst        r17, 5            ;carga el valor a la bandera T
+0000dd f00e                          BRTS    UART_FREE        ;brinca si T=1
+0000de cffb                          rjmp    UART_TRANSMIT
                                  UART_FREE:
-0000c0 9300 00c6                     sts        UDR0,r16        ;envia el dato guardado en r16
-0000c2 9508                          ret
+0000df 9300 00c6                     sts        UDR0,r16        ;envia el dato guardado en r16
+0000e1 9508                          ret
                                  
                                  
                                  ;---------------------------------Confiigurar ADC
                                  adcInit:
-0000c3 e400                          ldi r16, 0b01000000   ; Voltage Reference: AVcc with external capacitor at AREF pin
-0000c4 9300 007c                     sts ADMUX, r16        ; Enable ADC Right Adjust Result
+0000e2 e400                          ldi r16, 0b01000000   ; Voltage Reference: AVcc with external capacitor at AREF pin
+0000e3 9300 007c                     sts ADMUX, r16        ; Enable ADC Right Adjust Result
                                                            ; Analog Channel: ADC0
                                  
-0000c6 e807                          ldi r16, 0b10000111   ; Enable ADC
-0000c7 9300 007a                     sts ADCSRA, r16       ; ADC Prescaling Factor: 128
+0000e5 e807                          ldi r16, 0b10000111   ; Enable ADC
+0000e6 9300 007a                     sts ADCSRA, r16       ; ADC Prescaling Factor: 128
                                  
-0000c9 9508                          ret
+0000e8 9508                          ret
                                  
                                  adcInit2:
-0000ca e401                          ldi r16, 0b01000001   ; Voltage Reference: AVcc with external capacitor at AREF pin
-0000cb 9300 007c                     sts ADMUX, r16        ; Enable ADC Right Adjust Result
+0000e9 e401                          ldi r16, 0b01000001   ; Voltage Reference: AVcc with external capacitor at AREF pin
+0000ea 9300 007c                     sts ADMUX, r16        ; Enable ADC Right Adjust Result
                                                            ; Analog Channel: ADC1
                                  
-0000cd e807                          ldi r16, 0b10000111   ; Enable ADC
-0000ce 9300 007a                     sts ADCSRA, r16       ; ADC Prescaling Factor: 128
+0000ec e807                          ldi r16, 0b10000111   ; Enable ADC
+0000ed 9300 007a                     sts ADCSRA, r16       ; ADC Prescaling Factor: 128
                                  
-0000d0 9508                          ret
+0000ef 9508                          ret
                                  
                                  adcRead:
-0000d1 e400                          ldi r16, 0b01000000   ; Set ADSC flag to Trigger ADC Conversion process
-0000d2 9110 007a                     lds r17, ADCSRA       ;
-0000d4 2b10                          or  r17, r16          ;
-0000d5 9310 007a                     sts  ADCSRA, r17      ;
-0000d7 9508                          ret
+0000f0 e400                          ldi r16, 0b01000000   ; Set ADSC flag to Trigger ADC Conversion process
+0000f1 9110 007a                     lds r17, ADCSRA       ;
+0000f3 2b10                          or  r17, r16          ;
+0000f4 9310 007a                     sts  ADCSRA, r17      ;
+0000f6 9508                          ret
                                  
                                  adcWait:
-0000d8 9110 007a                     lds r17, ADCSRA       ; Observe the ADIF flag, it gets set by hardware when ADC conversion completes
-0000da ff14                          sbrs r17, 4           ;
+0000f7 9110 007a                     lds r17, ADCSRA       ; Observe the ADIF flag, it gets set by hardware when ADC conversion completes
+0000f9 ff14                          sbrs r17, 4           ;
                                  
-0000db 940c 00d8                     jmp adcWait           ; Keep checking until the flag is set by hardware
+0000fa 940c 00f7                     jmp adcWait           ; Keep checking until the flag is set by hardware
                                  
-0000dd e100                          ldi r16, 0b00010000   ; Set the flag again to signal 'ready-to-be-cleared' by hardware
-0000de 9110 007a                     lds r17, ADCSRA       ;
-0000e0 2b10                          or  r17, r16          ;
-0000e1 9310 007a                     sts  ADCSRA, r17      ;
-0000e3 9508                          ret
+0000fc e100                          ldi r16, 0b00010000   ; Set the flag again to signal 'ready-to-be-cleared' by hardware
+0000fd 9110 007a                     lds r17, ADCSRA       ;
+0000ff 2b10                          or  r17, r16          ;
+000100 9310 007a                     sts  ADCSRA, r17      ;
+000102 9508                          ret
                                  
                                  
                                  ;------Funcion Dividir entre 2---------------
                                  DIVIDIR:
-0000e4 9506                      	lsr r16
-0000e5 f010                      	brcs DECIMAL_1
-0000e6 0000                      	nop
-0000e7 9508                      ret
+000103 9506                      	lsr r16
+000104 f010                      	brcs DECIMAL_1
+000105 0000                      	nop
+000106 9508                      ret
                                  
                                  DECIMAL_1:
-0000e8 e375                      	ldi decimal, 53
-0000e9 9508                      ret
+000107 e375                      	ldi decimal, 53
+000108 9508                      ret
                                  
                                  ;-------Funcion Boton 1------------
                                  BOTON1:
-0000ea e080                      	ldi btn1, 0b00000000
-0000eb 9918                      	sbic PINB, 0
-0000ec e081                      	ldi btn1, 0b00000001
-0000ed 0000                      	nop
-0000ee 0000                      	nop
-0000ef 9508                      	ret
+000109 e080                      	ldi btn1, 0b00000000
+00010a 9918                      	sbic PINB, 0
+00010b e081                      	ldi btn1, 0b00000001
+00010c 0000                      	nop
+00010d 0000                      	nop
+00010e 9508                      	ret
                                  ;------funcion Boton2--------------
                                  	BOTON2:
-0000f0 e090                      	ldi btn2, 0b00000000
-0000f1 991d                      	sbic PINB, 5
-0000f2 e091                      	ldi btn2, 0b00000001
-0000f3 0000                      	nop
-0000f4 0000                      	NOP
-0000f5 9508                      	ret
+00010f e090                      	ldi btn2, 0b00000000
+000110 991d                      	sbic PINB, 5
+000111 e091                      	ldi btn2, 0b00000001
+000112 0000                      	nop
+000113 0000                      	NOP
+000114 9508                      	ret
                                  
                                  
                                  ;--------rutina de retardo------------
                                  delay_10ms:
-0000f6 e613                          ldi    r17,99       ; 1 ciclo
+000115 e613                          ldi    r17,99       ; 1 ciclo
                                  repetir1:
-0000f7 ec27                          ldi    r18,199      ; 1 ciclo
+000116 ec27                          ldi    r18,199      ; 1 ciclo
                                  repetir:
-0000f8 0000                          nop                    ; 1 ciclo
-0000f9 0000                          nop                    ; 1 ciclo
-0000fa 0000                          nop                    ; 1 ciclo
-0000fb 0000                          nop                    ; 1 ciclo
-0000fc 0000                          nop                    ; 1 ciclo
-0000fd 952a                          dec    r18            ; 1 ciclo
-0000fe f7c9                          brne repetir        ; 2 ciclos
-0000ff 951a                          dec    r17            ; 1 ciclo
-000100 f7b1                          brne repetir1        ; 2 ciclos
+000117 0000                          nop                    ; 1 ciclo
+000118 0000                          nop                    ; 1 ciclo
+000119 0000                          nop                    ; 1 ciclo
+00011a 0000                          nop                    ; 1 ciclo
+00011b 0000                          nop                    ; 1 ciclo
+00011c 952a                          dec    r18            ; 1 ciclo
+00011d f7c9                          brne repetir        ; 2 ciclos
+00011e 951a                          dec    r17            ; 1 ciclo
+00011f f7b1                          brne repetir1        ; 2 ciclos
                                  
-000101 9508                          ret                    ; 5 ciclo  
+000120 9508                          ret                    ; 5 ciclo  
                                  
                                   delay_500ms:
-000102 940e 010d                   call delay_100ms
-000104 940e 010d                   call delay_100ms
-000106 940e 010d                   call delay_100ms
-000108 940e 010d                   call delay_100ms
-00010a 940e 010d                   call delay_100ms
-00010c 9508                        ret
+000121 940e 012c                   call delay_100ms
+000123 940e 012c                   call delay_100ms
+000125 940e 012c                   call delay_100ms
+000127 940e 012c                   call delay_100ms
+000129 940e 012c                   call delay_100ms
+00012b 9508                        ret
                                  ;----------------------Esta es la subrutina de retardo delay_100ms  -------------------------
                                  
                                        
                                  delay_100ms:
-00010d 940e 00f6                        call delay_10ms
-00010f 940e 00f6                        call delay_10ms
-000111 940e 00f6                        call delay_10ms
-000113 940e 00f6                        call delay_10ms
-000115 940e 00f6                        call delay_10ms
-000117 940e 00f6                        call delay_10ms
-000119 940e 00f6                        call delay_10ms
-00011b 940e 00f6                        call delay_10ms
-00011d 940e 00f6                        call delay_10ms
-00011f 940e 00f6                        call delay_10ms
+00012c 940e 0115                        call delay_10ms
+00012e 940e 0115                        call delay_10ms
+000130 940e 0115                        call delay_10ms
+000132 940e 0115                        call delay_10ms
+000134 940e 0115                        call delay_10ms
+000136 940e 0115                        call delay_10ms
+000138 940e 0115                        call delay_10ms
+00013a 940e 0115                        call delay_10ms
+00013c 940e 0115                        call delay_10ms
+00013e 940e 0115                        call delay_10ms
 
 
 RESOURCE USE INFORMATION
@@ -1411,24 +1435,24 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  56 r17:  30 r18:   6 r19:   3 r20:  17 
-r21:  13 r22:  13 r23:   8 r24:   3 r25:   3 r26:   2 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  61 r17:  34 r18:   6 r19:   4 r20:  20 
+r21:  16 r22:  16 r23:   9 r24:   3 r25:   3 r26:   2 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 11 out of 35 (31.4%)
 
 "ATmega328P" instruction use summary:
-.lds  :   0 .sts  :   0 adc   :   0 add   :  11 adiw  :   0 and   :   0 
+.lds  :   0 .sts  :   0 adc   :   0 add   :  14 adiw  :   0 and   :   0 
 andi  :   0 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
 brcc  :   0 brcs  :   1 break :   0 breq  :   0 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   3 brlt  :   0 brmi  :   0 
 brne  :   2 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   1 brvc  :   0 
-brvs  :   0 bset  :   0 bst   :   1 call  :  53 cbi   :   0 cbr   :   0 
+brvs  :   0 bset  :   0 bst   :   1 call  :  62 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
 cpi   :   3 cpse  :   0 dec   :   2 eor   :   0 fmul  :   0 fmuls :   0 
 fmulsu:   0 icall :   0 ijmp  :   0 in    :   0 inc   :   3 jmp   :   1 
-ld    :   0 ldd   :   0 ldi   :  56 lds   :   8 lpm   :   0 lsl   :   0 
-lsr   :   1 mov   :  18 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+ld    :   0 ldd   :   0 ldi   :  62 lds   :   8 lpm   :   0 lsl   :   0 
+lsr   :   1 mov   :  22 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :  11 or    :   2 ori   :   0 out   :   3 pop   :   0 
 push  :   0 rcall :   0 ret   :  14 reti  :   0 rjmp  :   6 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   2 sbis  :   0 
@@ -1441,7 +1465,7 @@ Instructions used: 24 out of 113 (21.2%)
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000244    580      0    580   32768   1.8%
+[.cseg] 0x000000 0x000282    642      0    642   32768   2.0%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 

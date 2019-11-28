@@ -2,7 +2,7 @@ package com.sw.io;
 
 import com.panamahitek.ArduinoException;
 import com.panamahitek.PanamaHitek_Arduino;
-import com.sw.controller.DataController;
+import com.sw.controller.SerialDataController;
 import com.sw.menus.GraficaTemperatura;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
@@ -16,11 +16,12 @@ public class Conexion implements SerialPortEventListener
 {
 
     public static int DELAY_CONEXION = 300;
+    private final String PUERTO = "COM5";
     private PanamaHitek_Arduino ino;
     private GraficaTemperatura graficaTemperatura;
-    private DataController dataController;
+    private SerialDataController dataController;
 
-    public Conexion(GraficaTemperatura graficaTemperatura, DataController dataController)
+    public Conexion(GraficaTemperatura graficaTemperatura, SerialDataController dataController)
     {
 
         ino = new PanamaHitek_Arduino();
@@ -39,7 +40,7 @@ public class Conexion implements SerialPortEventListener
             try
             {
 
-                ino.arduinoRX("COM4", 9600, this);
+                ino.arduinoRX(PUERTO, 115200, this);
 
             } catch (ArduinoException | SerialPortException ex)
             {
@@ -59,17 +60,12 @@ public class Conexion implements SerialPortEventListener
 
             if (ino.isMessageAvailable())
             {
-
-                String[] data = ino.printMessage().split(",");
-
-                dataController.setDataControlMenu(Integer.parseInt(data[0]));
-                dataController.setDataGraficaTemperatura(Integer.parseInt(data[1]));
-                dataController.gestionarEnter(Integer.parseInt(data[2]));
-                dataController.gestionarEsc(Integer.parseInt(data[3]));
+                dataController.gestionarSerialData(ino.printMessage());
+                ino.flushSerialPort();
 
             }
 
-        } catch (SerialPortException | ArduinoException ex)
+        } catch (SerialPortException | ArduinoException | InterruptedException ex)
         {
             System.out.println(ex.getMessage());
         }

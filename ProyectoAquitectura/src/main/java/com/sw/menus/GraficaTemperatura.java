@@ -23,7 +23,7 @@ public class GraficaTemperatura implements Drawable
     private ArrayList<Animation> animaciones;
     private Camera camera;
     private Point lastPoint;
-    private int data;
+    private double data;
     private boolean dataAvailable;
 
     public GraficaTemperatura(Camera camera)
@@ -70,7 +70,7 @@ public class GraficaTemperatura implements Drawable
         int aux = 0;
 
         g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 20));
+        g.setFont(new Font("Peach Milk", Font.PLAIN, 20));
         g.drawLine(camera.getX(), Panel.ALTO - 1, camera.getX() + 30, Panel.ALTO - 1);
 
         for (int i = 0; i < Panel.ALTO; i += 15, y -= 15)
@@ -102,7 +102,8 @@ public class GraficaTemperatura implements Drawable
                 g.setColor(new Color(0, 228, 255));
                 g.drawLine(lineas.get(i).getP1().getIntegerX(), lineas.get(i).getP1().getIntegerY(), lineas.get(i).getP2().getIntegerX(), lineas.get(i).getP2().getIntegerY());
                 g.setColor(Color.black);
-                g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", lineas.get(i).getP2().getX(), lineas.get(i).getP2().getY());
+                g.setFont(new Font("Peach Milk", Font.PLAIN, 12));
+                g.drawString(((lineas.get(i).getP2().getY() - Panel.ALTO - 150) / -15) + "", (float) lineas.get(i).getP2().getX(), (float) lineas.get(i).getP2().getY() - 10);
 
             }
 
@@ -153,12 +154,12 @@ public class GraficaTemperatura implements Drawable
 
     }
 
-    public int getData()
+    public double getData()
     {
         return data;
     }
 
-    public void setData(int data)
+    public void setData(double data)
     {
         this.data = data;
     }

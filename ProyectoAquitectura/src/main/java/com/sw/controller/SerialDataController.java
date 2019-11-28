@@ -2,7 +2,7 @@ package com.sw.controller;
 
 import com.sw.main.Panel;
 import com.sw.menus.GraficaTemperatura;
-import com.sw.menus.InsertarCalificacion;
+import com.sw.menus.Calificacion;
 import com.sw.menus.MainMenu;
 import com.sw.menus.NuestraCalificacion;
 import java.awt.event.KeyAdapter;
@@ -12,21 +12,21 @@ import java.awt.event.KeyEvent;
  *
  * @author Mohammed
  */
-public class DataController extends KeyAdapter
+public class SerialDataController extends KeyAdapter
 {
 
     private MainMenu mainMenu;
     private GraficaTemperatura graficaTemperatura;
-    private InsertarCalificacion calificacion;
+    private Calificacion calificacion;
     private NuestraCalificacion nuestraCalificacion;
 
-    private final int OFFSETREAD = 40;
+    private final int OFFSETREAD = 200;
     private int lastData = 0;
     private int index;
 
     private boolean indexSet;
 
-    public DataController(MainMenu mainMenu, GraficaTemperatura graficaTemperatura, InsertarCalificacion calificacion, NuestraCalificacion nuestraCalificacion)
+    public SerialDataController(MainMenu mainMenu, GraficaTemperatura graficaTemperatura, Calificacion calificacion, NuestraCalificacion nuestraCalificacion)
     {
         this.mainMenu = mainMenu;
         this.graficaTemperatura = graficaTemperatura;
@@ -35,37 +35,46 @@ public class DataController extends KeyAdapter
 
     }
 
+    public void gestionarSerialData(String serialData) throws InterruptedException
+    {
+
+        String[] data = serialData.split(",");
+
+        double temperatura = Double.parseDouble(data[0]) + Double.parseDouble(data[1]) * 256;
+        int potenciometro = Integer.parseInt(data[2]) + Integer.parseInt(data[3]) * 256;
+
+        setDataGraficaTemperatura(temperatura);
+
+        setDataControlMenu(potenciometro);
+
+        gestionarEnter(Integer.parseInt(data[4]));
+        gestionarEsc(Integer.parseInt(data[5]));
+
+        Thread.sleep(300);
+
+    }
+
     public void setDataControlMenu(int data)
     {
 
-        System.out.println(data);
-
         if (!isIndexSet())
         {
-            index = Math.abs((int) Math.ceil(data / 85) - 3);
+
+            index = Math.abs((int) Math.ceil(data / 341) - 3);
 
             if (index == 3)
                 index = 2;
 
             lastData = data;
             setIndexSet(true);
-            System.out.println("1 vez");
 
         }
 
-        if (data >= 215)
+        if (data >= 900)
             index = 0;
 
-        if (data <= 40)
+        if (data <= 100)
             index = 2;
-
-        if (data <= lastData - OFFSETREAD)
-            if (index < 2)
-            {
-                index++;
-                lastData = data;
-
-            }
 
         if (data >= lastData + OFFSETREAD)
             if (index > 0)
@@ -75,11 +84,19 @@ public class DataController extends KeyAdapter
 
             }
 
+        if (data <= lastData - OFFSETREAD)
+            if (index < 2)
+            {
+                index++;
+                lastData = data;
+
+            }
+
         gestionarMenu();
 
     }
 
-    public void setDataGraficaTemperatura(int data)
+    public void setDataGraficaTemperatura(double data)
     {
 
         graficaTemperatura.setData(data);
@@ -163,6 +180,9 @@ public class DataController extends KeyAdapter
     public void gestionarEnter(int data)
     {
 
+        if (data == 0)
+            return;
+
         if (!Panel.status.equals(Panel.STATUS.Menu))
         {
 
@@ -175,7 +195,14 @@ public class DataController extends KeyAdapter
 
                     break;
 
+                case NuestraCalificacion:
+
+                    nuestraCalificacion.updateClics();
+
+                    break;
+
                 default:
+                    break;
 
             }
 
@@ -183,34 +210,33 @@ public class DataController extends KeyAdapter
 
         }
 
-        if (data != 0)
-            switch (index)
-            {
+        switch (index)
+        {
 
-                case 0:
+            case 0:
 
-                    Panel.status = Panel.STATUS.Temperatura;
+                Panel.status = Panel.STATUS.Temperatura;
 
-                    break;
+                break;
 
-                case 1:
+            case 1:
 
-                    Panel.status = Panel.STATUS.Calificacion;
+                Panel.status = Panel.STATUS.Calificacion;
 
-                    calificacion.reiniciarCalif();
+                calificacion.reiniciarCalif();
 
-                    break;
+                break;
 
-                case 2:
+            case 2:
 
-                    Panel.status = Panel.STATUS.NuestraCalificacion;
+                Panel.status = Panel.STATUS.NuestraCalificacion;
 
-                    nuestraCalificacion.reiniciarCortina();
+                nuestraCalificacion.reiniciarAnimaciones();
 
-                default:
-                    break;
+            default:
+                break;
 
-            }
+        }
 
     }
 

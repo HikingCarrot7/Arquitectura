@@ -33,7 +33,7 @@ public class Animation implements Drawable
 
         trails = new ArrayList<>();
 
-        calculateVelocity(p1.getX(), p1.getY(), p2.getX(), p2.getY());
+        calculateVelocity((float) p1.getX(), (float) p1.getY(), (float) p2.getX(), (float) p2.getY());
 
     }
 
@@ -41,8 +41,8 @@ public class Animation implements Drawable
     public void tick()
     {
 
-        if (Panel.status.equals(STATUS.Temperatura))
-            trails.add(new Trail(p1.x, p1.y, color, 4, 4, 0.04f));
+        if (Panel.status.equals(STATUS.Temperatura) || Panel.status.equals(STATUS.NuestraCalificacion))
+            trails.add(new Trail((float) p1.x, (float) p1.y, color, 4, 4, 0.04f));
 
         p1.x += velX;
         p1.y += velY;
@@ -71,7 +71,7 @@ public class Animation implements Drawable
     public void render(Graphics2D g)
     {
 
-        if (Panel.status.equals(STATUS.Temperatura))
+        if (Panel.status.equals(STATUS.Temperatura) || Panel.status.equals(STATUS.NuestraCalificacion))
         {
             g.setColor(color);
             g.fillRect(p1.getIntegerX(), p1.getIntegerY(), 4, 4);

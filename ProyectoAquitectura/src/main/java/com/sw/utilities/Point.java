@@ -7,16 +7,16 @@ package com.sw.utilities;
 public class Point
 {
 
-    public float x;
-    public float y;
+    public double x;
+    public double y;
 
-    public Point(float x, float y)
+    public Point(double x, double y)
     {
         this.x = x;
         this.y = y;
     }
 
-    public float getX()
+    public double getX()
     {
         return x;
     }
@@ -26,12 +26,12 @@ public class Point
         return (int) x;
     }
 
-    public void setX(float x)
+    public void setX(double x)
     {
         this.x = x;
     }
 
-    public float getY()
+    public double getY()
     {
         return y;
     }
@@ -41,7 +41,7 @@ public class Point
         return (int) y;
     }
 
-    public void setY(float y)
+    public void setY(double y)
     {
         this.y = y;
     }

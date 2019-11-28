@@ -1,16 +1,21 @@
 package com.sw.main;
 
-import com.sw.controller.DataController;
+import com.sw.controller.SerialDataController;
 import com.sw.graphics.Camera;
 import com.sw.io.Conexion;
 import com.sw.menus.GraficaTemperatura;
-import com.sw.menus.InsertarCalificacion;
+import com.sw.menus.Calificacion;
 import com.sw.menus.MainMenu;
 import com.sw.menus.NuestraCalificacion;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -24,10 +29,10 @@ public class Panel extends Canvas
 
     private Camera camera;
     private Conexion conexion;
-    private DataController dataController;
+    private SerialDataController dataController;
     private MainMenu mainMenu;
     private GraficaTemperatura temperatura;
-    private InsertarCalificacion calificacion;
+    private Calificacion calificacion;
     private NuestraCalificacion nuestraCalificacion;
 
     public static enum STATUS
@@ -50,21 +55,26 @@ public class Panel extends Canvas
         camera = new Camera(0, 0);
         mainMenu = new MainMenu();
         temperatura = new GraficaTemperatura(camera);
-        calificacion = new InsertarCalificacion();
+        calificacion = new Calificacion();
         nuestraCalificacion = new NuestraCalificacion();
-        dataController = new DataController(mainMenu, temperatura, calificacion, nuestraCalificacion);
+        dataController = new SerialDataController(mainMenu, temperatura, calificacion, nuestraCalificacion);
         conexion = new Conexion(temperatura, dataController);
 
         conexion.iniciarConexion();
 
+        try
+        {
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/res/peach_milk.TTF")));
+
+        } catch (FontFormatException | IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
         requestFocus();
         addKeyListener(dataController);
 
-    }
-
-    public synchronized void stop()
-    {
-        System.exit(1);
     }
 
     public void tick()

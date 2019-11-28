@@ -13,14 +13,14 @@ import java.awt.event.KeyEvent;
  *
  * @author HikingC7
  */
-public class InsertarCalificacion implements Drawable
+public class Calificacion implements Drawable
 {
 
     private String calif = "";
     private Rectangle asignarBoton;
     private boolean calificacionAsignada;
 
-    public InsertarCalificacion()
+    public Calificacion()
     {
         asignarBoton = new Rectangle(45 + 710 / 3, 400, 710 / 3, 70);
     }
@@ -53,13 +53,13 @@ public class InsertarCalificacion implements Drawable
 
         if (!isCalificacionAsignada())
         {
-            g.setFont(new Font("serif", Font.BOLD, 50));
+            g.setFont(new Font("Peach Milk", Font.PLAIN, 63));
             g.drawString("Calificación para este proyecto", Panel.ANCHO / 2 - "Calificación para este proyecto".length() / 2 * 22.1f, 100);
 
         } else
         {
-            g.setFont(new Font("serif", Font.BOLD, 60));
-            g.drawString("¡Calificación asignada!", Panel.ANCHO / 2 - 285, 300);
+            g.setFont(new Font("Peach Milk", Font.BOLD, 85));
+            g.drawString("¡Calificación asignada!", Panel.ANCHO / 2 - 370, 300);
 
         }
 
@@ -69,7 +69,7 @@ public class InsertarCalificacion implements Drawable
     {
 
         g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 40));
+        g.setFont(new Font("Peach Milk", Font.PLAIN, 40));
         g.drawString(calif, Panel.ANCHO / 2 - calif.length() / 2 * 17.68f, 200);
 
     }
@@ -78,9 +78,9 @@ public class InsertarCalificacion implements Drawable
     {
 
         g.setColor(Color.black);
-        g.setFont(new Font("serif", Font.BOLD, 40));
+        g.setFont(new Font("Peach Milk", Font.PLAIN, 55));
         g.drawRect(asignarBoton.x, asignarBoton.y, asignarBoton.width, asignarBoton.height);
-        g.drawString("Asignar", asignarBoton.x + 55, asignarBoton.y + 45);
+        g.drawString("Asignar", asignarBoton.x + 50, asignarBoton.y + 55);
         g.setStroke(new BasicStroke(3));
         g.setColor(new Color(0, 228, 255));
         g.drawRect(asignarBoton.x, asignarBoton.y, asignarBoton.width, asignarBoton.height);

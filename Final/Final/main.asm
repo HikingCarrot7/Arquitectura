@@ -1,10 +1,3 @@
-;
-; Created: 30/09/2019 02:31:44 p. m.
-; Author : Emmanuel
-;
-
-
-; Replace with your application code
 .include<m328pdef.inc>
 
 
@@ -14,9 +7,6 @@
 .def decimal = r23
 .def btn1 = r24
 .def btn2 = r25
-
-
-
 
 .org    0x000
 rjmp    START
@@ -29,22 +19,23 @@ START:
     ldi        centena, 0
 	
 
-                                ;DDRx: 1 = Salida, 0 = entrada
-    ldi        r16,0b00100000        ;configura PB0 como entrada y PB5 (LED) como salida
+										;DDRx: 1 = Salida, 0 = entrada
+    ldi        r16,0b00100000			;configura PB0 como entrada y PB5 (LED) como salida
     out        DDRB,r16
 
-    ldi        r16,0b00000000        ;configura puertoC como entrada (ADC)
+    ldi        r16,0b00000000			;configura puertoC como entrada (ADC)
     out        DDRC,r16
 
-    nop                            ;retardo
-                                ;PORTx: 1 = HIGH, 0 = LOW (siempre y cuando el pin se configuro como salida)    
+    nop									;retardo
+										;PORTx: 1 = HIGH, 0 = LOW (siempre y cuando el pin se configuro como salida)    
     call    UART_CONFIG
 
     ;call    ADC_CONFIG
+	
    
 
 CICLO:
-;--------Envia datos del potenciometro-----
+;--------Envia datos del Sensor 8 bits low ADC1-----
 
 	call adcInit2
     call adcRead
@@ -59,33 +50,33 @@ CICLO:
 	ldi decimal, 48
 
     mov r16, r18        ; r16 = r18
-
+	call DIVIDIR
 	call    ASCII
     
-    ldi        r17, 48
-    add        unidad, r17
-    add        decena, r17
-    add        centena, r17    
+    ldi r17, 48
+    add unidad, r17
+    add decena, r17
+    add centena, r17    
 
-    mov        r16, centena            
+    mov     r16, centena            
     call    UART_TRANSMIT
 
-    mov        r16, decena            
+    mov     r16, decena            
     call    UART_TRANSMIT
 
-    mov        r16, unidad            
+    mov     r16, unidad            
     call    UART_TRANSMIT
 
-	ldi r16, 124
+	ldi r16, 46
 	call UART_TRANSMIT
 
-	;---------Envia los valores de temperatura 8bits--------------
+	mov r16, decimal
+	call UART_TRANSMIT
 
-	call adcInit
-    call adcRead
-    call adcWait
-	lds r18, ADCL
-    lds r19, ADCH
+	ldi r16, 44
+	call UART_TRANSMIT
+
+	;---------Envia los valores del sensor 2 bits high--------------
 
 
     ldi unidad, 0
@@ -93,8 +84,8 @@ CICLO:
     ldi centena, 0
 	ldi decimal, 48
 
-    mov r16, r18        
-	call DIVIDIR
+    mov r16, r19
+	call DIVIDIR        
     call    ASCII
     
     ldi        r17, 48
@@ -117,19 +108,24 @@ CICLO:
 	mov r16, decimal
 	call UART_TRANSMIT
 
-	ldi r16, 124
+	ldi r16, 44
 	call UART_TRANSMIT
 	
-	;--------Envia los 2 bits faltantes---------
+	;--------Envia los datos del potenciometro ADC0---------
+	call adcInit
+	call adcRead
+    call adcWait
+	lds r18, ADCL
+    lds r19, ADCH
 
 	ldi unidad, 0
     ldi decena, 0
     ldi centena, 0
 	ldi decimal, 48
 
-    mov r16, r19        
-	call DIVIDIR
-    call    ASCII
+    mov r16, r18 ;ADCl        
+	;call DIVIDIR
+    call ASCII
     
     ldi        r17, 48
     add        unidad, r17
@@ -145,14 +141,38 @@ CICLO:
     mov        r16, unidad            
     call    UART_TRANSMIT
 
-	ldi r16, 46
+	ldi r16, 44
 	call UART_TRANSMIT
 
-	mov r16, decimal
+	;-----Envio los 2 bits faltantes de temperatura
+	;lds r19, ADCH
+
+	ldi unidad, 0
+    ldi decena, 0
+    ldi centena, 0
+	ldi decimal, 48
+
+    mov r16, r19 ;ADCH        
+	;call DIVIDIR
+    call ASCII
+    
+    ldi        r17, 48
+    add        unidad, r17
+    add        decena, r17
+    add        centena, r17    
+
+    mov        r16, centena            
+    call    UART_TRANSMIT
+
+    mov        r16, decena            
+    call    UART_TRANSMIT
+
+    mov        r16, unidad            
+    call    UART_TRANSMIT
+
+	ldi r16, 44
 	call UART_TRANSMIT
 
-	ldi r16, 124
-	call UART_TRANSMIT
 
 
 	;---------Envió de datos del boton aceptar-----------
@@ -171,7 +191,7 @@ CICLO:
     mov        r16, unidad            
     call    UART_TRANSMIT
 
-	ldi r16, 124
+	ldi r16, 44
 	call UART_TRANSMIT
 
 	;--------eNVIO DE DATOS DEL BOTON 2-------
@@ -190,15 +210,19 @@ CICLO:
     mov        r16, unidad            
     call    UART_TRANSMIT
 
-	ldi r16, 124
+	ldi r16, 44
 	call UART_TRANSMIT
 
 	;FIN ENvio de datos
     ldi        r16, 10            ;Salto de linea
     call    UART_TRANSMIT
+
+    ;--retardo de 1 segundo----------  
+	call adcInit2                             
 	call delay_100ms 
-    ;--retardo de 1 segundo----------                               
-    
+	call delay_100ms 
+	call delay_100ms 
+	call delay_100ms 
 
     rjmp CICLO
 ;--------convertir a ASCII------------------
