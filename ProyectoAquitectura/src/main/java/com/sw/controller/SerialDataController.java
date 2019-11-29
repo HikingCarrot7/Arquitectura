@@ -1,8 +1,8 @@
 package com.sw.controller;
 
 import com.sw.main.Panel;
-import com.sw.menus.GraficaTemperatura;
 import com.sw.menus.Calificacion;
+import com.sw.menus.GraficaTemperatura;
 import com.sw.menus.MainMenu;
 import com.sw.menus.NuestraCalificacion;
 import java.awt.event.KeyAdapter;
@@ -47,8 +47,8 @@ public class SerialDataController extends KeyAdapter
 
         setDataControlMenu(potenciometro);
 
-        gestionarEnter(Integer.parseInt(data[4]));
-        gestionarEsc(Integer.parseInt(data[5]));
+        gestionarEsc(Integer.parseInt(data[4]));
+        gestionarEnter(Integer.parseInt(data[5]));
 
         Thread.sleep(300);
 

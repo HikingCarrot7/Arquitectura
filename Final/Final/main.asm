@@ -174,7 +174,7 @@ CICLO:
 	call UART_TRANSMIT
 
 
-
+	ldi r16, 0
 	;---------Envió de datos del boton aceptar-----------
 	call BOTON1
 	ldi unidad, 0
@@ -331,7 +331,7 @@ ret
 ;-------Funcion Boton 1------------
 BOTON1:
 	ldi btn1, 0b00000000
-	sbic PINB, 0
+	sbic PINB, 1
 	ldi btn1, 0b00000001
 	nop
 	nop

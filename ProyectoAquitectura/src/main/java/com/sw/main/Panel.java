@@ -3,8 +3,8 @@ package com.sw.main;
 import com.sw.controller.SerialDataController;
 import com.sw.graphics.Camera;
 import com.sw.io.Conexion;
-import com.sw.menus.GraficaTemperatura;
 import com.sw.menus.Calificacion;
+import com.sw.menus.GraficaTemperatura;
 import com.sw.menus.MainMenu;
 import com.sw.menus.NuestraCalificacion;
 import java.awt.Canvas;
@@ -120,7 +120,7 @@ public class Panel extends Canvas
 
         Graphics2D g = (Graphics2D) bs.getDrawGraphics();
 
-        g.setColor(new Color(206, 249, 254));
+        g.setColor(Color.white);
         g.fillRect(0, 0, ANCHO, ALTO);
 
         g.translate(-camera.getX(), 0);
