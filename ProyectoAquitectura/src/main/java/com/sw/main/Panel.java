@@ -19,7 +19,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class Panel extends Canvas
 {

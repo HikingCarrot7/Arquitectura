@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class Animation implements Drawable
 {

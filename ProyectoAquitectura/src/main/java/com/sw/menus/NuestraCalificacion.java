@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class NuestraCalificacion implements Drawable
 {

@@ -10,7 +10,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class SerialDataController extends KeyAdapter
 {
@@ -47,7 +47,7 @@ public class SerialDataController extends KeyAdapter
 
         setDataControlMenu(potenciometro);
 
-        gestionarEsc(Integer.parseInt(data[4]));
+        gestionarSalir(Integer.parseInt(data[4]));
         gestionarEnter(Integer.parseInt(data[5]));
 
         Thread.sleep(300);
@@ -120,7 +120,7 @@ public class SerialDataController extends KeyAdapter
             gestionarEnter(1);
 
         if (e.getKeyCode() == KeyEvent.VK_SPACE)
-            gestionarEsc(1);
+            gestionarSalir(1);
 
         gestionarMenu();
 
@@ -191,7 +191,7 @@ public class SerialDataController extends KeyAdapter
 
                 case Calificacion:
 
-                    calificacion.setCalificacionAsignada(true);
+                    calificacion.checarCalificacion();
 
                     break;
 
@@ -240,7 +240,7 @@ public class SerialDataController extends KeyAdapter
 
     }
 
-    public void gestionarEsc(int data)
+    public void gestionarSalir(int data)
     {
 
         if (data != 0)

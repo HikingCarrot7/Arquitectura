@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class MainMenu implements Drawable
 {

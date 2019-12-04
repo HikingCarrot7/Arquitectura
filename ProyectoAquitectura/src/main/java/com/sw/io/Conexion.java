@@ -10,7 +10,7 @@ import jssc.SerialPortException;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class Conexion implements SerialPortEventListener
 {
@@ -18,7 +18,6 @@ public class Conexion implements SerialPortEventListener
     public static int DELAY_CONEXION = 300;
     private final String PUERTO = "COM4";
     private PanamaHitek_Arduino ino;
-    private GraficaTemperatura graficaTemperatura;
     private SerialDataController dataController;
 
     public Conexion(GraficaTemperatura graficaTemperatura, SerialDataController dataController)
@@ -26,7 +25,6 @@ public class Conexion implements SerialPortEventListener
 
         ino = new PanamaHitek_Arduino();
 
-        this.graficaTemperatura = graficaTemperatura;
         this.dataController = dataController;
 
     }

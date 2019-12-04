@@ -17,12 +17,12 @@ public class Calificacion implements Drawable
 {
 
     private String calif = "";
-    private Rectangle asignarBoton;
+    private Rectangle asignarCalif;
     private boolean calificacionAsignada;
 
     public Calificacion()
     {
-        asignarBoton = new Rectangle(45 + 710 / 3, 400, 710 / 3, 70);
+        asignarCalif = new Rectangle(45 + 710 / 3, 400, 710 / 3, 70);
     }
 
     @Override
@@ -79,11 +79,11 @@ public class Calificacion implements Drawable
 
         g.setColor(Color.black);
         g.setFont(new Font("Peach Milk", Font.PLAIN, 55));
-        g.drawRect(asignarBoton.x, asignarBoton.y, asignarBoton.width, asignarBoton.height);
-        g.drawString("Asignar", asignarBoton.x + 50, asignarBoton.y + 55);
+        g.drawRect(asignarCalif.x, asignarCalif.y, asignarCalif.width, asignarCalif.height);
+        g.drawString("Asignar", asignarCalif.x + 50, asignarCalif.y + 55);
         g.setStroke(new BasicStroke(3));
         g.setColor(new Color(0, 228, 255));
-        g.drawRect(asignarBoton.x, asignarBoton.y, asignarBoton.width, asignarBoton.height);
+        g.drawRect(asignarCalif.x, asignarCalif.y, asignarCalif.width, asignarCalif.height);
 
     }
 
@@ -96,6 +96,13 @@ public class Calificacion implements Drawable
         if (e.getKeyCode() >= 48 && e.getKeyCode() <= 57)
             if (calif.length() <= 6)
                 calif += e.getKeyChar();
+
+    }
+
+    public void checarCalificacion()
+    {
+        if (!calif.trim().equals(""))
+            setCalificacionAsignada(true);
 
     }
 

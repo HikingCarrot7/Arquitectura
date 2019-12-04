@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class BufferedImageLoader
 {

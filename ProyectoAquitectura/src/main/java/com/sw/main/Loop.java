@@ -2,7 +2,7 @@ package com.sw.main;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class Loop implements Runnable
 {

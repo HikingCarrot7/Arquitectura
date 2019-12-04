@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class GraficaTemperatura implements Drawable
 {

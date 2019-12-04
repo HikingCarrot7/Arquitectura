@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public final class Window extends JFrame
 {

@@ -4,7 +4,7 @@ import com.sw.io.Conexion;
 
 /**
  *
- * @author Mohammed
+ * @author TODOS
  */
 public class Camera
 {
@@ -17,6 +17,7 @@ public class Camera
     {
         this.x = x;
         this.y = y;
+
     }
 
     public void moveCamera()
