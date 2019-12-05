@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author Carlos Álvarez Trejo.
+ * @author Ricardo Nicolás Canul Ibarra.
  */
 public class SerialDataController extends KeyAdapter
 {
@@ -117,8 +117,6 @@ public class SerialDataController extends KeyAdapter
          * Por ejemplo, si cuando iniciamos la aplicación el valor de potenciómetro es 150 (se pocisionará en el índice 2) el último dato guardado será 150
          *
          * y hasta que el potenciómetro no marque un valor mayor a 150 + 200 (200 es nuestro desfase de lectura) el índice no se actualizará.
-         *
-         *
          *
          *
          * Esto se implementó de esta forma para que potenciómetro no sea hipersensible al manipular el menú.
