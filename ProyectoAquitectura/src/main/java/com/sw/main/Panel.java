@@ -19,14 +19,17 @@ import java.io.IOException;
 
 /**
  *
- * @author TODOS
+ * @author Carlos Álvarez Trejo.
  */
 public class Panel extends Canvas
 {
 
-    public static int ANCHO = 800;
-    public static int ALTO = 600;
+    public static int ANCHO = 800; // Ancho de la ventana.
+    public static int ALTO = 600; // Alto de la ventana.
 
+    /**
+     * Declaración de objetos.
+     */
     private Camera camera;
     private Conexion conexion;
     private SerialDataController dataController;
@@ -35,6 +38,9 @@ public class Panel extends Canvas
     private Calificacion calificacion;
     private NuestraCalificacion nuestraCalificacion;
 
+    /**
+     * Enum que nos ayuda a administrar el estado del programa.
+     */
     public static enum STATUS
     {
 
@@ -45,8 +51,11 @@ public class Panel extends Canvas
 
     }
 
-    public static STATUS status = STATUS.Menu;
+    public static STATUS status = STATUS.Menu; // El estado del programa al inicio es el Menú.
 
+    /**
+     * Inicializamos los objetos.
+     */
     public void init()
     {
 
@@ -60,12 +69,12 @@ public class Panel extends Canvas
         dataController = new SerialDataController(mainMenu, temperatura, calificacion, nuestraCalificacion);
         conexion = new Conexion(temperatura, dataController);
 
-        conexion.iniciarConexion();
+        conexion.iniciarConexion(); // Iniciamos la conexión.
 
         try
         {
 
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/res/peach_milk.TTF")));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/res/peach_milk.TTF"))); // a cool font.
 
         } catch (FontFormatException | IOException e)
         {
@@ -77,11 +86,12 @@ public class Panel extends Canvas
 
     }
 
-    public void tick()
+    public void tick() // 60 actualizaciones por segundo.
     {
 
-        switch (status)
+        switch (status)// Actualizamos la interfaz depediendo del estado del programa.
         {
+
             case Menu:
 
                 mainMenu.tick();
@@ -113,7 +123,7 @@ public class Panel extends Canvas
 
     }
 
-    public void render()
+    public void render() // Se hace siempre.
     {
 
         BufferStrategy bs = getBufferStrategy();
@@ -123,9 +133,9 @@ public class Panel extends Canvas
         g.setColor(Color.white);
         g.fillRect(0, 0, ANCHO, ALTO);
 
-        g.translate(-camera.getX(), 0);
+        g.translate(-camera.getX(), 0); // Movemos la visión con respecto a las coordenadas de la cámara.
 
-        switch (status)
+        switch (status) // Dibujamos la interfaz depediendo del estado del programa.
         {
 
             case Menu:

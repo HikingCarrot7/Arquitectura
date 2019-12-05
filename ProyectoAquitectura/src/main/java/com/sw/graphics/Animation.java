@@ -11,7 +11,9 @@ import java.util.Random;
 
 /**
  *
- * @author TODOS
+ * Animación que se genera cuando se gráfica (detalles visuales).
+ *
+ * @author Eusebio Ajas Santos.
  */
 public class Animation implements Drawable
 {
@@ -90,8 +92,10 @@ public class Animation implements Drawable
 
         double distance = Math.sqrt(Math.pow((toX - fromX), 2) + Math.pow((toY - fromY), 2));
         double speed = 10; //set the speed in [2,n)  n should be < 20 for normal speed
+
         //find Y
         velY = (float) ((toY - fromY) * speed / distance);
+
         //find X
         velX = (float) ((toX - fromX) * speed / distance);
 

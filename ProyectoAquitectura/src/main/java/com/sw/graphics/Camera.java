@@ -3,15 +3,16 @@ package com.sw.graphics;
 import com.sw.io.Conexion;
 
 /**
+ * Mueve el campo de visión de la gráfica para dar la sensación se movimiento cuando se gráfica.
  *
- * @author TODOS
+ * @author Eusebio Ajas Santos.
  */
 public class Camera
 {
 
-    private int x;
+    private int x; //Posición en x de la cámara.
     private int y;
-    private volatile boolean cameraStopped;
+    private volatile boolean cameraStopped; // Cámara detenida (se regresó al menú).
 
     public Camera(int x, int y)
     {
@@ -20,9 +21,15 @@ public class Camera
 
     }
 
+    /**
+     * Mueve la cámara 40 pixeles cada vez que se añade una línea.
+     */
     public void moveCamera()
     {
 
+        /**
+         * Cuando se añade una línea, dentro del programa ocurre un retraso de 300 milisegundos. Este hilo mueve la cámara 40 píxeles durante ese tiempo.
+         */
         new Thread(() ->
         {
 

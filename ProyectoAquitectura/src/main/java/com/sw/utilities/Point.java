@@ -2,7 +2,9 @@ package com.sw.utilities;
 
 /**
  *
- * @author TODOS
+ * Representa un punto en el plano R^2.
+ *
+ * @author Eusebio Ajas Santos.
  */
 public class Point
 {

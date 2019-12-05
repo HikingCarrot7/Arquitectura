@@ -1,8 +1,14 @@
 package com.sw.main;
 
 /**
+ * Clase Main del programa.
  *
- * @author TODOS
+ * @author Eusebio Ajas Santos.
+ * @author Emmanuel Chable Collí.
+ * @author Naomi García Sanchez.
+ * @author Carlos Álvarez Trejo.
+ * @author Ricardo Nicolás Canul Ibarra.
+ *
  */
 public class Main
 {

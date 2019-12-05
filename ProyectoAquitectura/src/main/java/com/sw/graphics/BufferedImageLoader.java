@@ -7,11 +7,18 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author TODOS
+ * @author Eusebio Ajas Santos.
  */
 public class BufferedImageLoader
 {
 
+    /**
+     * Carga una imagen y la devuelve.
+     *
+     * @param path La ruta de la imagen.
+     *
+     * @return La imagen.
+     */
     public BufferedImage loadImage(String path)
     {
 

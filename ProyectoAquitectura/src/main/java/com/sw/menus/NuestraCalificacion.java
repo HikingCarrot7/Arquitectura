@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  *
- * @author TODOS
+ * @author Naomi García Sanchez.
  */
 public class NuestraCalificacion implements Drawable
 {
@@ -35,6 +35,9 @@ public class NuestraCalificacion implements Drawable
 
     }
 
+    /**
+     * Actualizamos los objetos de esta interfaz.
+     */
     @Override
     public void tick()
     {
@@ -50,6 +53,11 @@ public class NuestraCalificacion implements Drawable
 
     }
 
+    /**
+     * Dibujamos todos los objetos que conforman esta interfaz.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     @Override
     public void render(Graphics2D g)
     {
@@ -89,11 +97,17 @@ public class NuestraCalificacion implements Drawable
 
     }
 
+    /**
+     * Clics para hacer que el regalo reviente.
+     */
     public void updateClics()
     {
         contClics++;
     }
 
+    /**
+     * Animación de explosión.
+     */
     private void addParticles()
     {
 

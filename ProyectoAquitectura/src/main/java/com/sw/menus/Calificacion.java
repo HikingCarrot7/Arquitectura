@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 
 /**
  *
- * @author HikingC7
+ * @author Naomi García Sanchez.
  */
 public class Calificacion implements Drawable
 {
@@ -31,6 +31,11 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Dibujamos todos los objetos que conforman esta interfaz.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     @Override
     public void render(Graphics2D g)
     {
@@ -46,6 +51,11 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Dibujamos el título.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     private void dibujarTitulo(Graphics2D g)
     {
 
@@ -74,6 +84,11 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Dibujamos el rectángulo "Asignar".
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     private void dibujarBox(Graphics2D g)
     {
 
@@ -87,6 +102,11 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Escribimos la calificación.
+     *
+     * @param e El objeto KeyEvent que se crea al presionar una tecla.
+     */
     public void escribirCalificacion(KeyEvent e)
     {
 
@@ -99,6 +119,9 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Revisamos que el valor no esté vacío.
+     */
     public void checarCalificacion()
     {
         if (!calif.trim().equals(""))
@@ -106,6 +129,9 @@ public class Calificacion implements Drawable
 
     }
 
+    /**
+     * Reiniciamos el valor que se había puesto por el usuario.
+     */
     public void reiniciarCalif()
     {
         calif = "";

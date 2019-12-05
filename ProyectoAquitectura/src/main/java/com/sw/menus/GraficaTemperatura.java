@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author TODOS
+ * @author Eusebio Ajax Santos.
  */
 public class GraficaTemperatura implements Drawable
 {
@@ -36,6 +36,10 @@ public class GraficaTemperatura implements Drawable
 
     }
 
+    /**
+     * Actualizamos todos los objetos que conforman esta interfaz.
+     *
+     */
     @Override
     public void tick()
     {
@@ -45,6 +49,12 @@ public class GraficaTemperatura implements Drawable
 
     }
 
+    /**
+     * Dibujamos todos los objetos que conforman esta interfaz.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     *
+     */
     @Override
     public void render(Graphics2D g)
     {
@@ -63,6 +73,11 @@ public class GraficaTemperatura implements Drawable
 
     }
 
+    /**
+     * Dibujamos la regla de guía para la temperatura.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     private void dibujarRegla(Graphics2D g)
     {
 
@@ -88,6 +103,11 @@ public class GraficaTemperatura implements Drawable
 
     }
 
+    /**
+     * Dibujamos las líneas en la gráfica.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     private void dibujarLineas(Graphics2D g)
     {
 
@@ -113,6 +133,10 @@ public class GraficaTemperatura implements Drawable
 
     }
 
+    /**
+     * Añadimos una línea cada vez que hay datos disponible.
+     *
+     */
     private void anadirLinea()
     {
 
@@ -137,11 +161,23 @@ public class GraficaTemperatura implements Drawable
         animaciones.add(new Animation(p1, p2));
     }
 
+    /**
+     *
+     * Obtenemos el siguiente punto con los datos que se establecieron en el <tt>SerialDataController</tt>
+     *
+     * @return El siguiente punto.
+     *
+     * @see SerialDataController
+     *
+     */
     private Point getNextPoint()
     {
         return new Point(lastPoint.getIntegerX() + 40, Panel.ALTO - (getData() * 15) + 150);
     }
 
+    /**
+     * Se reinicia la gráfica y todos sus componentes.
+     */
     public void reiniciarGrafica()
     {
 

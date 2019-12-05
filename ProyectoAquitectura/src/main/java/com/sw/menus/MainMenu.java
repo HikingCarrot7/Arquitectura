@@ -10,7 +10,7 @@ import java.awt.Rectangle;
 
 /**
  *
- * @author TODOS
+ * @author Naomi García Sanchez.
  */
 public class MainMenu implements Drawable
 {
@@ -58,6 +58,11 @@ public class MainMenu implements Drawable
 
     }
 
+    /**
+     * Dibujamos todos los objetos que conforman esta interfaz.
+     *
+     * @param g El objeto Graphics2D para dibujar en el Canvas.
+     */
     @Override
     public void render(Graphics2D g)
     {

@@ -10,13 +10,13 @@ import jssc.SerialPortException;
 
 /**
  *
- * @author TODOS
+ * @author Carlos Álvarez Trejo.
  */
 public class Conexion implements SerialPortEventListener
 {
 
-    public static int DELAY_CONEXION = 300;
-    private final String PUERTO = "COM4";
+    public static int DELAY_CONEXION = 300; // Retraso de conexión.
+    private final String PUERTO = "COM4"; // Puerto.
     private PanamaHitek_Arduino ino;
     private SerialDataController dataController;
 
@@ -29,6 +29,9 @@ public class Conexion implements SerialPortEventListener
 
     }
 
+    /**
+     * Iniciamos la conexión con el puerto serial.
+     */
     public void iniciarConexion()
     {
 
@@ -38,7 +41,7 @@ public class Conexion implements SerialPortEventListener
             try
             {
 
-                ino.arduinoRX(PUERTO, 115200, this);
+                ino.arduinoRX(PUERTO, 115200, this); // Configuramos los 115200 baudios.
 
             } catch (ArduinoException | SerialPortException ex)
             {
@@ -49,6 +52,13 @@ public class Conexion implements SerialPortEventListener
 
     }
 
+    /**
+     *
+     * Cada vez que reciben datos del puerto serial se llama a este método.
+     *
+     * @param serialPortEvent El objeto que se crea cuando se leen datos del puerto.
+     *
+     */
     @Override
     public void serialEvent(SerialPortEvent serialPortEvent)
     {
@@ -56,10 +66,10 @@ public class Conexion implements SerialPortEventListener
         try
         {
 
-            if (ino.isMessageAvailable())
+            if (ino.isMessageAvailable()) // Si datos que leer, los leemos.
             {
-                dataController.gestionarSerialData(ino.printMessage());
-                ino.flushSerialPort();
+                dataController.gestionarSerialData(ino.printMessage()); // Obtenemos los datos y se los pasamos al controlador.
+                ino.flushSerialPort(); // Limpiamos la entrada.
 
             }
 

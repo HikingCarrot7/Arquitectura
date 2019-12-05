@@ -5,7 +5,9 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author TODOS
+ * Inicia la ventana del programa.
+ *
+ * @author Carlos Álvarez Trejo.
  */
 public final class Window extends JFrame
 {

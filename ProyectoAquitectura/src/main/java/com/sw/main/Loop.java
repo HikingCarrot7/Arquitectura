@@ -2,7 +2,10 @@ package com.sw.main;
 
 /**
  *
- * @author TODOS
+ * Loop del programa.
+ *
+ * @author Carlos Álvarez Trejo.
+ *
  */
 public class Loop implements Runnable
 {

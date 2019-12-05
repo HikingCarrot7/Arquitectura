@@ -2,7 +2,9 @@ package com.sw.utilities;
 
 /**
  *
- * @author TODOS
+ * Las coordenadas X y Y de los dos puntos que conforman una línea.
+ *
+ * @author Eusebio Ajax Santos.
  */
 public class Linea
 {
