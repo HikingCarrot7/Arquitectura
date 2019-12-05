@@ -67,7 +67,7 @@ public class Panel extends Canvas
         calificacion = new Calificacion();
         nuestraCalificacion = new NuestraCalificacion();
         dataController = new SerialDataController(mainMenu, temperatura, calificacion, nuestraCalificacion);
-        conexion = new Conexion(temperatura, dataController);
+        conexion = new Conexion(dataController);
 
         conexion.iniciarConexion(); // Iniciamos la conexión.
 

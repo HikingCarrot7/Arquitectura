@@ -3,7 +3,6 @@ package com.sw.io;
 import com.panamahitek.ArduinoException;
 import com.panamahitek.PanamaHitek_Arduino;
 import com.sw.controller.SerialDataController;
-import com.sw.menus.GraficaTemperatura;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
@@ -20,7 +19,7 @@ public class Conexion implements SerialPortEventListener
     private PanamaHitek_Arduino ino;
     private SerialDataController dataController;
 
-    public Conexion(GraficaTemperatura graficaTemperatura, SerialDataController dataController)
+    public Conexion(SerialDataController dataController)
     {
 
         ino = new PanamaHitek_Arduino();

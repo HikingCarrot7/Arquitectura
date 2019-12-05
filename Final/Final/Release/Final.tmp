@@ -23,27 +23,27 @@
  </OUTPUT_FILES>
  <LABELS>
   <START><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>14</LINE></START>
-  <UART_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>254</LINE></UART_CONFIG>
-  <CICLO><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>37</LINE></CICLO>
-  <adcInit2><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>290</LINE></adcInit2>
-  <adcRead><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>300</LINE></adcRead>
-  <adcWait><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>307</LINE></adcWait>
-  <DIVIDIR><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>321</LINE></DIVIDIR>
-  <ASCII><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>230</LINE></ASCII>
-  <UART_TRANSMIT><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>268</LINE></UART_TRANSMIT>
-  <adcInit><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>280</LINE></adcInit>
-  <BOTON1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>332</LINE></BOTON1>
-  <BOTON2><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>340</LINE></BOTON2>
-  <delay_100ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>377</LINE></delay_100ms>
-  <L_CENTENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>231</LINE></L_CENTENA>
-  <L_DECENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>237</LINE></L_DECENA>
+  <UART_CONFIG><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>255</LINE></UART_CONFIG>
+  <CICLO><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>33</LINE></CICLO>
+  <adcInit2><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>298</LINE></adcInit2>
+  <adcRead><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>309</LINE></adcRead>
+  <adcWait><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>317</LINE></adcWait>
+  <DIVIDIR><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>332</LINE></DIVIDIR>
+  <ASCII><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>225</LINE></ASCII>
+  <UART_TRANSMIT><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>272</LINE></UART_TRANSMIT>
+  <adcInit><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>287</LINE></adcInit>
+  <BOTON1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>345</LINE></BOTON1>
+  <BOTON2><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>355</LINE></BOTON2>
+  <delay_100ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>397</LINE></delay_100ms>
+  <L_CENTENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>227</LINE></L_CENTENA>
+  <L_DECENA><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>235</LINE></L_DECENA>
   <L_UNIDAD><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>243</LINE></L_UNIDAD>
-  <L_FIN><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>249</LINE></L_FIN>
-  <UART_FREE><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>274</LINE></UART_FREE>
-  <DECIMAL_1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>327</LINE></DECIMAL_1>
-  <delay_10ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>350</LINE></delay_10ms>
-  <repetir1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>352</LINE></repetir1>
-  <repetir><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>354</LINE></repetir>
-  <delay_500ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>367</LINE></delay_500ms>
+  <L_FIN><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>251</LINE></L_FIN>
+  <UART_FREE><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>280</LINE></UART_FREE>
+  <DECIMAL_1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>339</LINE></DECIMAL_1>
+  <delay_10ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>365</LINE></delay_10ms>
+  <repetir1><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>369</LINE></repetir1>
+  <repetir><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>373</LINE></repetir>
+  <delay_500ms><FILE>C:\Users\HikingC7\Documents\GitHub\Arquitectura\Final\Final\main.asm</FILE><LINE>386</LINE></delay_500ms>
  </LABELS>
 </ASSEMBLER_INFO>
