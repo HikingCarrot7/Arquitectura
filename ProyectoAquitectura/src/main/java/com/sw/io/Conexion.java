@@ -21,11 +21,8 @@ public class Conexion implements SerialPortEventListener
 
     public Conexion(SerialDataController dataController)
     {
-
         ino = new PanamaHitek_Arduino();
-
         this.dataController = dataController;
-
     }
 
     /**
@@ -33,13 +30,10 @@ public class Conexion implements SerialPortEventListener
      */
     public void iniciarConexion()
     {
-
         new Thread(() ->
         {
-
             try
             {
-
                 ino.arduinoRX(PUERTO, 115200, this); // Configuramos los 115200 baudios.
 
             } catch (ArduinoException | SerialPortException ex)
@@ -48,7 +42,6 @@ public class Conexion implements SerialPortEventListener
             }
 
         }).start();
-
     }
 
     /**
@@ -61,22 +54,18 @@ public class Conexion implements SerialPortEventListener
     @Override
     public void serialEvent(SerialPortEvent serialPortEvent)
     {
-
         try
         {
-
             if (ino.isMessageAvailable()) // Si datos que leer, los leemos.
             {
                 dataController.gestionarSerialData(ino.printMessage()); // Obtenemos los datos y se los pasamos al controlador.
                 ino.flushSerialPort(); // Limpiamos la entrada.
-
             }
 
         } catch (SerialPortException | ArduinoException | InterruptedException ex)
         {
             System.out.println(ex.getMessage());
         }
-
     }
 
 }
